@@ -162,6 +162,8 @@ def scan_cointegration_windows_gpu(
 
 
 import yfinance as yf
+import matplotlib.pyplot as plt
+import matplotlib.patches as mpatches
 
 symbol_a, symbol_b = "PEP", "KO"
 df = yf.download([symbol_a, symbol_b], period="8d", interval="1m")["Close"]
@@ -172,3 +174,28 @@ res_cointegrated = res[res["cointegrated"]]
 
 print(f"Total windows: {len(res)}; Cointegrated: {len(res_cointegrated)}")
 print(res_cointegrated.head())
+
+
+
+fig, ax = plt.subplots(figsize=(14, 6))
+
+# Plot both series
+ax.plot(df.index, df[symbol_a], label=symbol_a, linewidth=1.5, alpha=0.8)
+ax.plot(df.index, df[symbol_b], label=symbol_b, linewidth=1.5, alpha=0.8)
+
+# Shade cointegrated windows
+for _, row in res_cointegrated.iterrows():
+    ax.axvspan(row["start"], row["end"], alpha=0.2, color="green")
+
+ax.set_xlabel("Time")
+ax.set_ylabel("Price")
+ax.set_title(f"Cointegration Windows: {symbol_a} vs {symbol_b}")
+ax.legend()
+ax.grid(True, alpha=0.3)
+
+# Add legend for shaded regions
+green_patch = mpatches.Patch(color="green", alpha=0.2, label="Cointegrated Windows")
+ax.legend(handles=ax.get_legend_handles_labels()[0] + [green_patch])
+
+plt.tight_layout()
+plt.show()
