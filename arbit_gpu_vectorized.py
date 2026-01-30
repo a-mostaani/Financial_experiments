@@ -3,59 +3,45 @@
 # Vectorized over ALL rolling windows in one go.
 # ============================================================
 
-import torch
-import pandas as pd
-from typing import Tuple
+# ============================================================
+# Add MacKinnon (1994/2010) critical values & p-values
+# to the batch GPU Engle–Granger pipeline.
+# ============================================================
 
 import numpy as np
 import torch
+import pandas as pd
+from typing import Tuple
+from statsmodels.tsa.adfvalues import mackinnoncrit, mackinnonp  # MacKinnon CVs & p-values
+# Alternative import also works:
+# from statsmodels.tsa.stattools import mackinnoncrit, mackinnonp
+# (stattools re-exports them)  # docs: statsmodels API  [4](https://www.statsmodels.org/stable/_modules/statsmodels/tsa/stattools.html)[5](https://www.statsmodels.org/stable/api.html)
 
-def _to_gpu_1d(x, dtype=torch.float64):
-    """
-    x: array-like (NumPy array, pandas Series, list)
-    Returns a 1D torch.Tensor on CUDA without the 'non-writable' warning.
-    """
-    # Force a writable NumPy array (copy=True guarantees writeable, contiguous buffer)
-    np_x = np.array(x, dtype=np.float64, copy=True)
-    return torch.tensor(np_x, dtype=dtype, device="cuda")  # torch.tensor() copies
-
+# ---------- (same helpers; includes the "no-warning" tensor conversion) ----------
+def _to_gpu_1d(x, dtype=torch.float64) -> torch.Tensor:
+    np_x = np.array(x, dtype=np.float64, copy=True)  # force writable, contiguous
+    return torch.tensor(np_x, dtype=dtype, device="cuda")
 
 def _rolling_unfold_1d(x: torch.Tensor, window: int) -> torch.Tensor:
-    """
-    Return shape: (num_windows, window)
-    """
-    # x must be 1D
     if x.dim() != 1:
         raise ValueError("x must be 1D")
-    # Use unfold over a dummy batch dimension
-    x2 = x.unsqueeze(0)  # (1, T)
-    # Unfold over last dimension
-    return x2.unfold(dimension=1, size=window, step=1).squeeze(0)  # (num_windows, window)
+    return x.unsqueeze(0).unfold(dimension=1, size=window, step=1).squeeze(0)
 
 @torch.no_grad()
-def engle_granger_adf_batch(
-    series_a, series_b, window: int
-) -> Tuple[torch.Tensor, torch.Tensor, torch.Tensor]:
+def engle_granger_adf_batch(series_a, series_b, window: int) -> Tuple[torch.Tensor, torch.Tensor, torch.Tensor]:
     """
     Compute Engle–Granger (ADF on residuals) across ALL rolling windows on GPU.
-
-    series_a, series_b: array-like (length T)
-    window: int rolling window length
-
     Returns:
-        beta_windows: (num_windows,) OLS slope β per window for Y ~ βX
-        adf_t_windows: (num_windows,) ADF t-stat per window on residuals
-        valid_mask: (num_windows,) bool mask for windows with finite stats
+        beta  : (num_windows,) OLS slope Y ~ βX per window
+        adf_t : (num_windows,) ADF(1) t-stat on residuals (intercept only)
+        valid : (num_windows,) boolean mask of finite/valid windows
     """
+    X = _to_gpu_1d(series_a)
+    Y = _to_gpu_1d(series_b)
 
-    # Move to GPU
-    X = _to_gpu_1d(series_a)  # (T,)
-    Y = _to_gpu_1d(series_b)  # (T,)
-
-    T = X.numel()
-    if T != Y.numel():
+    if X.numel() != Y.numel():
         raise ValueError("Series lengths must match.")
-    if T < window + 2:
+    if X.numel() < window + 2:
         raise ValueError("Series too short for requested window.")
 
     # Build all rolling windows (N, W)
@@ -63,99 +49,127 @@ def engle_granger_adf_batch(
     Yw = _rolling_unfold_1d(Y, window)  # (N, W)
     N, W = Xw.shape
 
-    # --- Step 1: OLS β per window for Y ~ βX (with intercept absorbed by centering)
+    # ----- OLS β per window: Y ~ βX (demeaned)
     Xc = Xw - Xw.mean(dim=1, keepdim=True)
     Yc = Yw - Yw.mean(dim=1, keepdim=True)
-    Sxx = torch.sum(Xc * Xc, dim=1)              # (N,)
-    Sxy = torch.sum(Xc * Yc, dim=1)              # (N,)
-    beta = Sxy / Sxx                             # (N,)
-
-    # Guard against zero variance windows (flat price) -> set NaN beta
+    Sxx = torch.sum(Xc * Xc, dim=1)           # (N,)
+    Sxy = torch.sum(Xc * Yc, dim=1)           # (N,)
+    beta = Sxy / Sxx                          # (N,)
     beta = torch.where(Sxx > 0, beta, torch.full_like(beta, float("nan")))
 
-    # --- Step 2: residuals e_t = Y - βX (broadcast β over time dimension)
-    Ew = Yw - beta.unsqueeze(1) * Xw              # (N, W)
+    # Residuals
+    Ew = Yw - beta.unsqueeze(1) * Xw          # (N, W)
 
-    # --- Step 3: ADF(1) on residuals, window-wise, with intercept
-    # Δe_t = α + ρ e_{t-1} + u_t
-    lagged = Ew[:, :-1]                           # (N, W-1) -> e_{t-1}
-    diff   = Ew[:, 1:] - Ew[:, :-1]               # (N, W-1) -> Δe_t
+    # ----- ADF(1) with intercept: Δe_t = α + ρ e_{t-1} + u_t
+    lagged = Ew[:, :-1]                       # (N, W-1)
+    diff   = Ew[:, 1:] - Ew[:, :-1]           # (N, W-1)
 
-    # OLS with intercept can be done via covariance/variance on centered data:
+    # OLS of diff on [1, lagged]
     x = lagged
     y = diff
-    x_mean = x.mean(dim=1, keepdim=True)          # (N,1)
-    y_mean = y.mean(dim=1, keepdim=True)          # (N,1)
+    x_mean = x.mean(dim=1, keepdim=True)
+    y_mean = y.mean(dim=1, keepdim=True)
     x_c = x - x_mean
     y_c = y - y_mean
 
-    Sxx_adf = torch.sum(x_c * x_c, dim=1)         # (N,)
-    Sxy_adf = torch.sum(x_c * y_c, dim=1)         # (N,)
-    rho = Sxy_adf / Sxx_adf                        # (N,)
+    Sxx_adf = torch.sum(x_c * x_c, dim=1)     # (N,)
+    Sxy_adf = torch.sum(x_c * y_c, dim=1)     # (N,)
+    rho = Sxy_adf / Sxx_adf                   # (N,)
 
-    # α = ȳ - ρ x̄  (not used for t-stat directly but needed for residuals)
     alpha = (y_mean.squeeze(1) - rho * x_mean.squeeze(1))  # (N,)
-
-    # Residuals of the regression to estimate s^2
     y_hat = alpha.unsqueeze(1) + rho.unsqueeze(1) * x      # (N, W-1)
     u = y - y_hat                                          # (N, W-1)
-    dof = (W - 1) - 2  # parameters: α and ρ
-    s2 = torch.sum(u * u, dim=1) / dof                     # (N,)
 
-    # Var(ρ) = s^2 / Sxx
+    dof = (W - 1) - 2  # params: α and ρ
+    s2 = torch.sum(u * u, dim=1) / dof                     # (N,)
     var_rho = s2 / Sxx_adf
     adf_t = rho / torch.sqrt(var_rho)                      # (N,)
 
-    # Valid windows mask (finite stats & positive Sxx terms)
     valid = torch.isfinite(adf_t) & torch.isfinite(beta) & (Sxx > 0) & (Sxx_adf > 0)
 
     return beta, adf_t, valid
+
+
+# ---------- NEW: MacKinnon critical values & p-values ----------
+def compute_mackinnon_cv_pvalues(adf_t_vals: np.ndarray, window: int, regression: str = "c"):
+    """
+    Get MacKinnon critical values (1%, 5%, 10%) and p-values for ADF stats.
+    - Critical values use MacKinnon (2010) with finite-sample adjustment via nobs.
+    - P-values use MacKinnon asymptotic response surfaces.
+    regression: 'c' | 'ct' | 'ctt' | 'nc'  (must match the ADF regression form you used)
+    """
+    nobs = window - 1  # ADF(1) uses Δe_t of length W-1; this matches adfuller conventions. [3](https://www.statsmodels.org/0.8.0/generated/statsmodels.tsa.stattools.adfuller.html)
+
+    # Critical values for ADF (N=1) at {1%, 5%, 10%}
+    # mackinnoncrit returns the updated (2010) CVs; finite-sample if nobs is finite. [1](https://tedboy.github.io/statsmodels_doc/generated/statsmodels.tsa.adfvalues.mackinnoncrit.html)
+    cv = mackinnoncrit(N=1, regression=regression, nobs=nobs)
+    # Handle return type (list/array vs dict), depending on statsmodels version
+    if isinstance(cv, dict):
+        crit_1, crit_5, crit_10 = cv.get("1%"), cv.get("5%"), cv.get("10%")
+    else:
+        # Most versions return a length-3 array [1%, 5%, 10%]
+        crit_1, crit_5, crit_10 = float(cv[0]), float(cv[1]), float(cv[2])
+
+    # P-values from MacKinnon asymptotics (ADF, N=1). [2](https://tedboy.github.io/statsmodels_doc/generated/statsmodels.tsa.adfvalues.mackinnonp.html)
+    pvals = np.array([mackinnonp(float(t), regression=regression, N=1) for t in adf_t_vals], dtype=float)
+
+    return crit_1, crit_5, crit_10, pvals
+
 
 def scan_cointegration_windows_gpu(
     df: pd.DataFrame,
     symbol_a: str,
     symbol_b: str,
     window: int,
-    adf_crit: float = -3.4,   # tune this to your needs or pass exact value
+    regression: str = "c",   # must match the GPU ADF regression (we use 'c' by default)
+    alpha: float = 0.05,     # threshold significance level for cointegration flag
     dropna: bool = True,
 ) -> pd.DataFrame:
     """
-    df: DataFrame with columns [symbol_a, symbol_b] (e.g., Close prices)
-    Returns a DataFrame of all windows and the subset that pass the ADF threshold.
+    Return a DataFrame with window start/end, β, ADF t-stat, MacKinnon CVs, p-values, and flags.
     """
-
-    # Clean and align
-    sub = df[[symbol_a, symbol_b]].dropna() if dropna else df[[symbol_a, symbol_b]]
-
+    sub = df[[symbol_a, symbol_b]].copy()
+    if dropna:
+        sub = sub.dropna()
     if len(sub) < window + 2:
         raise ValueError("Not enough rows after dropna for the given window.")
 
-    # Batch GPU computation
+    # ---- GPU numerics
     beta, adf_t, valid = engle_granger_adf_batch(
-        sub[symbol_a].to_numpy(copy=True), sub[symbol_b].to_numpy(copy=True), window=window
+        sub[symbol_a].to_numpy(copy=True),
+        sub[symbol_b].to_numpy(copy=True),
+        window=window,
     )
 
-    # Map windows to start/end timestamps
+    # Map windows to timestamps
     idx = sub.index
     N = len(sub) - window + 1
     start_idx = idx[:N]
     end_idx = idx[window - 1:]
 
-    # Move results back to CPU
-    beta_c = beta.detach().cpu()
-    adf_c  = adf_t.detach().cpu()
-    valid_c = valid.detach().cpu()
+    # Bring results to CPU/NumPy
+    beta_c = beta.detach().cpu().numpy()
+    adf_c  = adf_t.detach().cpu().numpy()
+    valid_c = valid.detach().cpu().numpy().astype(bool)
+
+    # ---- NEW: MacKinnon CVs & p-values (CPU; tiny cost)
+    crit_1, crit_5, crit_10, pvals = compute_mackinnon_cv_pvalues(adf_c, window=window, regression=regression)
 
     out = pd.DataFrame({
         "start": start_idx.values,
         "end": end_idx.values,
-        "beta": beta_c.numpy(),
-        "adf_t": adf_c.numpy(),
-        "valid": valid_c.numpy().astype(bool),
+        "beta": beta_c,
+        "adf_t": adf_c,
+        "valid": valid_c,
+        "crit_1pct": crit_1,
+        "crit_5pct": crit_5,
+        "crit_10pct": crit_10,
+        "pvalue": pvals,
     })
 
-    # Flag cointegrated windows using the threshold and validity
-    out["cointegrated"] = (out["adf_t"] < adf_crit) & out["valid"]
+    # Flag cointegration at chosen alpha using the corresponding critical value
+    crit = crit_5 if alpha == 0.05 else (crit_1 if alpha == 0.01 else crit_10)
+    out["cointegrated"] = (out["adf_t"] < crit) & out["valid"]
 
     return out
 
@@ -169,7 +183,7 @@ symbol_a, symbol_b = "PEP", "KO"
 df = yf.download([symbol_a, symbol_b], period="8d", interval="1m")["Close"]
 
 # Batch scan: e.g., a ~ 200-minute window
-res = scan_cointegration_windows_gpu(df, symbol_a, symbol_b, window=20, adf_crit=-3.4)
+res = scan_cointegration_windows_gpu(df, symbol_a, symbol_b, window=20,  regression="c", alpha=0.05)
 res_cointegrated = res[res["cointegrated"]]
 
 print(f"Total windows: {len(res)}; Cointegrated: {len(res_cointegrated)}")
