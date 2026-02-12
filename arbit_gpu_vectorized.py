@@ -179,7 +179,7 @@ import yfinance as yf
 import matplotlib.pyplot as plt
 import matplotlib.patches as mpatches
 
-symbol_a, symbol_b = "PEP", "KO"
+symbol_a, symbol_b = "AMD", "NVDA"
 df = yf.download([symbol_a, symbol_b], period="8d", interval="1m")["Close"]
 
 # Batch scan: e.g., a ~ 200-minute window
