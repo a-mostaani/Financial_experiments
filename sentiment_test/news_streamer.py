@@ -1,93 +1,5 @@
 
 
-# using RealTime-NewsAPI (commented out)
-# # news_streamer.py
-# import websocket
-# import json
-# import os
-# import redis
-
-# API_KEY =  "" #os.getenv("NEWSFILTER_API_KEY")
-# if not API_KEY:
-#     raise ValueError("NEWSFILTER_API_KEY not set!")
-
-# WS_URL = f"wss://stream.newsfilter.io/v1/stream?apiKey={API_KEY}"
-
-# redis_client = redis.Redis(host="localhost", port=6379, db=0)
-
-# def on_open(ws):
-#     print("Connected to RealTime-NewsAPI stream.")
-
-# def on_message(ws, message):
-#     data = json.loads(message)
-#     print("Article:", data.get("title"))
-#     redis_client.lpush("news_queue", json.dumps(data))
-
-# def on_error(ws, error):
-#     print("WS ERROR:", error)
-
-# def on_close(ws, close_status_code, close_msg):
-#     print("WS CLOSED:", close_status_code, close_msg)
-
-# ws_app = websocket.WebSocketApp(
-#     WS_URL,
-#     on_open=on_open,
-#     on_message=on_message,
-#     on_error=on_error,
-#     on_close=on_close,
-# )
-
-# ws_app.run_forever()
-
-
-
-
-
-# marketaux_streamer.py
-# import requests, time, json, redis
-
-# API_KEY = "YOUR_MARKETAUX_KEY"
-# redis_client = redis.Redis(host="localhost", port=6379, db=0)
-
-# while True:
-#     url = f"https://api.marketaux.com/v1/news/all?api_token={API_KEY}&symbols=AAPL,MSFT,TSLA&limit=5"
-#     data = requests.get(url).json()
-
-#     for article in data.get("data", []):
-#         redis_client.lpush("news_queue", json.dumps(article))
-#         print("Queued:", article["title"])
-
-#     time.sleep(30)  # poll every 30 seconds
-
-
-
-#alpaca_streamer.py
-# import os
-# import json
-# import redis
-# from alpaca_trade_api import Stream
-
-# API_KEY = "PKDWUNBEY3V7EGFODHOOV32KGR"
-# API_SECRET = "CEHsW7SacBjXxY2DkZgf6DkbxzQxfyCJszUsCD5dgnK7"
-
-# redis_client = redis.Redis(host="localhost", port=6379, db=0)
-
-# TICKERS = ["AAPL", "MSFT", "GOOGL", "NVDA", "TSLA"]
-
-# async def on_news(news):
-#     ndict = news._raw
-#     print("News:", ndict.get("headline"))
-#     redis_client.lpush("news_queue", json.dumps(ndict))
-
-# def main():
-#     stream = Stream(API_KEY, API_SECRET)
-#     stream.subscribe_news(on_news, *TICKERS)
-#     print("Starting Alpaca news stream...")
-#     stream.run()      # <-- IMPORTANT: No await
-
-# if __name__ == "__main__":
-#     main()
-
 
 #massive streamer:
 import os
@@ -103,7 +15,7 @@ import redis
 from dateutil import parser as dtparse
 
 # ------------------ Config ------------------
-API_KEY =  "IY0ukWrPwFRstIx0hzFbmolpZR5_WTDR" #os.getenv("MASSIVE_API_KEY")
+API_KEY =   os.getenv("MASSIVE_API_KEY")
 if not API_KEY:
     raise RuntimeError("Set MASSIVE_API_KEY env variable")
 
