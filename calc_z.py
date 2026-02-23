@@ -22,6 +22,10 @@ def zscore(series: pd.Series, ddof: int = 0) -> pd.Series:
 
 # Example:
 import yfinance as yf
+from dotenv import load_dotenv, find_dotenv
+dotenv_path=find_dotenv()
+print("FOUND DOTENV:", dotenv_path)
+load_dotenv(dotenv_path=dotenv_path)
 px = yf.download("AAPL", period="6mo", interval="1d")["Close"]
 z_roll_20 = rolling_zscore(px, window=20, ddof=1)
 z_full = zscore(px, ddof=1)

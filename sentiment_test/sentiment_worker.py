@@ -6,6 +6,8 @@ import redis
 import psycopg2
 from vllm import LLM, SamplingParams
 
+
+
 def analyze_sentiment(llm, params, text):
     prompt = f"Classify this financial news headline as positive, neutral, or negative:\n\n{text}"
     out = llm.generate(prompt, params)

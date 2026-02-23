@@ -2,6 +2,7 @@
 
 
 #massive streamer:
+from dotenv import load_dotenv, find_dotenv
 import os
 import time
 import json
@@ -15,6 +16,9 @@ import redis
 from dateutil import parser as dtparse
 
 # ------------------ Config ------------------
+dotenv_path=find_dotenv()
+print("FOUND DOTENV:", dotenv_path)
+load_dotenv(dotenv_path=dotenv_path)
 API_KEY =   os.getenv("MASSIVE_API_KEY")
 if not API_KEY:
     raise RuntimeError("Set MASSIVE_API_KEY env variable")
