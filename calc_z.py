@@ -21,7 +21,11 @@ def zscore(series: pd.Series, ddof: int = 0) -> pd.Series:
     return (series - mu) / sigma
 
 # Example:
-# import yfinance as yf
-# px = yf.download("AAPL", period="6mo", interval="1d")["Close"]
-# z_roll_20 = rolling_zscore(px, window=20, ddof=1)
-# z_full = zscore(px, ddof=1)
+import yfinance as yf
+px = yf.download("AAPL", period="6mo", interval="1d")["Close"]
+z_roll_20 = rolling_zscore(px, window=20, ddof=1)
+z_full = zscore(px, ddof=1)
+print("Rolling Z-score (20-day):")
+print(z_roll_20.tail())
+print("\nFull-series Z-score:")
+print(z_full.tail())
