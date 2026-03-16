@@ -15,6 +15,16 @@ import requests
 import redis
 from dateutil import parser as dtparse
 
+
+#debugging .env loading:
+
+import os, sys, pathlib
+print("sys.argv[0]        :", sys.argv[0], flush=True)
+print("__file__           :", __file__, flush=True)
+print("Path(__file__).cwd?:", pathlib.Path(__file__).resolve().parent, flush=True)
+print("os.getcwd()        :", os.getcwd(), flush=True)
+
+
 # ------------------ Config ------------------
 dotenv_path=find_dotenv()
 print("FOUND DOTENV:", dotenv_path)
@@ -101,7 +111,7 @@ def seen_add(stable_id: str) -> bool:
     """
     return r.sadd(REDIS_SEEN_SET, stable_id) == 1
 
-def handle_batch(items: Iterable[Dict]) -> int:
+def handle_batch(items: Iterable[Dict]) -> Tuple[int, Optional[datetime]]:
     added = 0
     latest_ts: Optional[datetime] = None
 
