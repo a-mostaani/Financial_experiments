@@ -3,6 +3,7 @@ set -e
 
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 PYTHON="/home/rshamostaani/miniconda3/envs/vllmFinance/bin/python"
+STREAMLIT="/home/rshamostaani/miniconda3/envs/vllmFinance/bin/streamlit"
 LOG_DIR="$SCRIPT_DIR/logs"
 mkdir -p "$LOG_DIR"
 
@@ -54,7 +55,7 @@ WORKER_PID=$!
 sleep 1
 
 echo "[launcher] Starting dashboard.py → logs/dashboard.log"
-streamlit run "$SCRIPT_DIR/dashboard.py" >> "$LOG_DIR/dashboard.log" 2>&1 &
+$STREAMLIT run "$SCRIPT_DIR/dashboard.py" >> "$LOG_DIR/dashboard.log" 2>&1 &
 DASHBOARD_PID=$!
 
 echo "[launcher] All services started. Logs in $LOG_DIR/"
