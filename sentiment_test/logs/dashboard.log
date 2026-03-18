@@ -1,0 +1,9 @@
+./start.sh: line 57: streamlit: command not found
+
+  You can now view your Streamlit app in your browser.
+
+  Local URL: http://localhost:8501
+  Network URL: http://172.28.178.237:8501
+
+/home/rshamostaani/Financial_experiments/sentiment_test/dashboard.py:16: UserWarning: pandas only supports SQLAlchemy connectable (engine/connection) or database string URI or sqlite3 DBAPI2 connection. Other DBAPI2 objects are not tested. Please consider using SQLAlchemy.
+  df = pd.read_sql("SELECT * FROM sentiment ORDER BY timestamp DESC LIMIT 200", conn)

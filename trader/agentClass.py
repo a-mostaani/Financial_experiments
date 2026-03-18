@@ -3,6 +3,7 @@ from gymnasium import spaces
 import numpy as np
 import torch
 from stable_baselines3 import PPO
+from trader.feature_builder import build_observation, OBS_DIM
 
 # --- MEMORY FENCING ---
 # Restrict PyTorch to only use a fraction of the GPU to protect the LLM
@@ -13,51 +14,74 @@ torch.cuda.empty_cache()
 class ArbitrageTradingEnv(gym.Env):
     """VRAM-optimized custom trading environment."""
     
-    def __init__(self):
+    def __init__(self, initial_cash: float = 10000.0):
         super(ArbitrageTradingEnv, self).__init__()
-        
+
         # Action Space: Continuous [-1, 1] for Short/Hold/Long
         self.action_space = spaces.Box(low=-1, high=1, shape=(1,), dtype=np.float32)
-        
-        # Observation Space: [price_change, sentiment_score, sentiment_volatility, bid_ask_spread, z_score]
-        self.observation_space = spaces.Box(
-            low=-np.inf, high=np.inf, shape=(5,), dtype=np.float32
-        )
-        
-        self.balance = 10000.0
 
-    def step(self, action):
-        obs = self._get_current_observation()
-        
+        # Observation Space: 9 normalised features built by feature_builder.build_observation
+        #   [0] sentiment_score, [1] spread_pct, [2] z_score, [3] beta,
+        #   [4] adf_t, [5] coint_pvalue_inv, [6] cointegrated,
+        #   [7] cash_ratio, [8] market_volatility
+        self.observation_space = spaces.Box(
+            low=-1.0, high=1.0, shape=(OBS_DIM,), dtype=np.float32
+        )
+
+        self.initial_cash = initial_cash
+        self.balance = initial_cash
+
+    def step(self, action, **obs_kwargs):
+        obs = self._get_current_observation(**obs_kwargs)
+
         # Execute trade and calculate reward (Placeholder)
         step_reward = self._calculate_reward(action, obs)
-        
+
         terminated = self.balance <= 0
-        truncated = False 
-        
+        truncated = False
+
         return obs, step_reward, terminated, truncated, {}
 
     def reset(self, seed=None, options=None):
         super().reset(seed=seed)
-        self.balance = 10000.0
+        self.balance = self.initial_cash
         return self._get_current_observation(), {}
         
-    def _get_current_observation(self):
-        # The data format adapter processes the raw API and LLM text outputs,
-        # perfectly standardizing them into this clean float array for the GPU.
-        price_change = 0.005 # Normalized price
-        sentiment_score = 0.8
-        sentiment_volatility = 0.05
-        bid_ask_spread = 0.02
-        z_score = 2.1
-        
-        return np.array([
-            price_change, 
-            sentiment_score, 
-            sentiment_volatility, 
-            bid_ask_spread, 
-            z_score
-        ], dtype=np.float32)
+    def _get_current_observation(
+        self,
+        sentiment_label: str = "neutral",
+        spread_pct: float = 0.0,
+        z_score: float = 0.0,
+        beta: float = 1.0,
+        adf_t: float = 0.0,
+        coint_pvalue: float = 1.0,
+        cointegrated: bool = False,
+        market_volatility: float = 0.0,
+    ) -> np.ndarray:
+        """
+        Build the normalised observation vector.
+
+        Pass live values from:
+          - sentiment_label   : sentiment_worker  (analyze_sentiment output)
+          - spread_pct        : calc_spread        (get_bid_ask_spread()["spread_pct"])
+          - z_score           : calc_z             (latest rolling_zscore value)
+          - beta, adf_t,
+            coint_pvalue,
+            cointegrated      : arbit_gpu_vectorized (latest window row from scan_cointegration_windows_gpu)
+          - market_volatility : rolling std of returns for the traded asset
+        """
+        return build_observation(
+            sentiment_label=sentiment_label,
+            spread_pct=spread_pct,
+            z_score=z_score,
+            beta=beta,
+            adf_t=adf_t,
+            coint_pvalue=coint_pvalue,
+            cointegrated=cointegrated,
+            available_cash=self.balance,
+            initial_cash=self.initial_cash,
+            market_volatility=market_volatility,
+        )
 
     def _calculate_reward(self, action, obs):
         return 0.0

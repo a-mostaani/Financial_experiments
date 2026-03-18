@@ -1,0 +1,635 @@
+INFO 03-18 15:51:02 [utils.py:261] non-default args: {'disable_log_stats': True, 'model': 'mistralai/Mistral-7B-Instruct-v0.3'}
+INFO 03-18 15:51:03 [model.py:541] Resolved architecture: MistralForCausalLM
+INFO 03-18 15:51:03 [model.py:1561] Using max model len 32768
+INFO 03-18 15:51:03 [scheduler.py:226] Chunked prefill is enabled with max_num_batched_tokens=8192.
+INFO 03-18 15:51:03 [vllm.py:624] Asynchronous scheduling is enabled.
+[2026-03-18 15:51:04] WARNING utils.py:121: Multiple valid tokenizer files found. Using tokenizer.model.v3.
+WARNING 03-18 15:51:04 [interface.py:470] Using 'pin_memory=False' as WSL is detected. This may slow down the performance.
+WARNING 03-18 15:51:04 [system_utils.py:140] We must use the `spawn` multiprocessing start method. Overriding VLLM_WORKER_MULTIPROC_METHOD to 'spawn'. See https://docs.vllm.ai/en/latest/usage/troubleshooting.html#python-multiprocessing for more information. Reasons: WSL is detected and NVML is not compatible with fork
+[0;36m(EngineCore_DP0 pid=72175)[0;0m INFO 03-18 15:51:06 [core.py:96] Initializing a V1 LLM engine (v0.15.0) with config: model='mistralai/Mistral-7B-Instruct-v0.3', speculative_config=None, tokenizer='mistralai/Mistral-7B-Instruct-v0.3', skip_tokenizer_init=False, tokenizer_mode=auto, revision=None, tokenizer_revision=None, trust_remote_code=False, dtype=torch.bfloat16, max_seq_len=32768, download_dir=None, load_format=auto, tensor_parallel_size=1, pipeline_parallel_size=1, data_parallel_size=1, disable_custom_all_reduce=False, quantization=None, enforce_eager=False, enable_return_routed_experts=False, kv_cache_dtype=auto, device_config=cuda, structured_outputs_config=StructuredOutputsConfig(backend='auto', disable_fallback=False, disable_any_whitespace=False, disable_additional_properties=False, reasoning_parser='', reasoning_parser_plugin='', enable_in_reasoning=False), observability_config=ObservabilityConfig(show_hidden_metrics_for_version=None, otlp_traces_endpoint=None, collect_detailed_traces=None, kv_cache_metrics=False, kv_cache_metrics_sample=0.01, cudagraph_metrics=False, enable_layerwise_nvtx_tracing=False, enable_mfu_metrics=False, enable_mm_processor_stats=False, enable_logging_iteration_details=False), seed=0, served_model_name=mistralai/Mistral-7B-Instruct-v0.3, enable_prefix_caching=True, enable_chunked_prefill=True, pooler_config=None, compilation_config={'level': None, 'mode': <CompilationMode.VLLM_COMPILE: 3>, 'debug_dump_path': None, 'cache_dir': '', 'compile_cache_save_format': 'binary', 'backend': 'inductor', 'custom_ops': ['none'], 'splitting_ops': ['vllm::unified_attention', 'vllm::unified_attention_with_output', 'vllm::unified_mla_attention', 'vllm::unified_mla_attention_with_output', 'vllm::mamba_mixer2', 'vllm::mamba_mixer', 'vllm::short_conv', 'vllm::linear_attention', 'vllm::plamo2_mamba_mixer', 'vllm::gdn_attention_core', 'vllm::kda_attention', 'vllm::sparse_attn_indexer', 'vllm::rocm_aiter_sparse_attn_indexer'], 'compile_mm_encoder': False, 'compile_sizes': [], 'compile_ranges_split_points': [8192], 'inductor_compile_config': {'enable_auto_functionalized_v2': False, 'combo_kernels': True, 'benchmark_combo_kernel': True}, 'inductor_passes': {}, 'cudagraph_mode': <CUDAGraphMode.FULL_AND_PIECEWISE: (2, 1)>, 'cudagraph_num_of_warmups': 1, 'cudagraph_capture_sizes': [1, 2, 4, 8, 16, 24, 32, 40, 48, 56, 64, 72, 80, 88, 96, 104, 112, 120, 128, 136, 144, 152, 160, 168, 176, 184, 192, 200, 208, 216, 224, 232, 240, 248, 256, 272, 288, 304, 320, 336, 352, 368, 384, 400, 416, 432, 448, 464, 480, 496, 512], 'cudagraph_copy_inputs': False, 'cudagraph_specialize_lora': True, 'use_inductor_graph_partition': False, 'pass_config': {'fuse_norm_quant': False, 'fuse_act_quant': False, 'fuse_attn_quant': False, 'eliminate_noops': True, 'enable_sp': False, 'fuse_gemm_comms': False, 'fuse_allreduce_rms': False}, 'max_cudagraph_capture_size': 512, 'dynamic_shapes_config': {'type': <DynamicShapesType.BACKED: 'backed'>, 'evaluate_guards': False, 'assume_32_bit_indexing': True}, 'local_cache_dir': None}
+[0;36m(EngineCore_DP0 pid=72175)[0;0m INFO 03-18 15:51:08 [parallel_state.py:1212] world_size=1 rank=0 local_rank=0 distributed_init_method=tcp://172.28.178.237:55831 backend=nccl
+[0;36m(EngineCore_DP0 pid=72175)[0;0m INFO 03-18 15:51:08 [parallel_state.py:1423] rank 0 in world size 1 is assigned as DP rank 0, PP rank 0, PCP rank 0, TP rank 0, EP rank N/A
+[0;36m(EngineCore_DP0 pid=72175)[0;0m WARNING 03-18 15:51:08 [interface.py:470] Using 'pin_memory=False' as WSL is detected. This may slow down the performance.
+[0;36m(EngineCore_DP0 pid=72175)[0;0m INFO 03-18 15:51:09 [gpu_model_runner.py:4021] Starting to load model mistralai/Mistral-7B-Instruct-v0.3...
+[0;36m(EngineCore_DP0 pid=72175)[0;0m INFO 03-18 15:51:09 [cuda.py:364] Using FLASH_ATTN attention backend out of potential backends: ('FLASH_ATTN', 'FLASHINFER', 'TRITON_ATTN', 'FLEX_ATTENTION')
+[0;36m(EngineCore_DP0 pid=72175)[0;0m INFO 03-18 15:51:10 [weight_utils.py:567] No consolidated.safetensors.index.json found in remote.
+[0;36m(EngineCore_DP0 pid=72175)[0;0m Loading safetensors checkpoint shards:   0% Completed | 0/1 [00:00<?, ?it/s]
+[0;36m(EngineCore_DP0 pid=72175)[0;0m Loading safetensors checkpoint shards: 100% Completed | 1/1 [00:09<00:00,  9.73s/it]
+[0;36m(EngineCore_DP0 pid=72175)[0;0m Loading safetensors checkpoint shards: 100% Completed | 1/1 [00:09<00:00,  9.73s/it]
+[0;36m(EngineCore_DP0 pid=72175)[0;0m 
+[0;36m(EngineCore_DP0 pid=72175)[0;0m INFO 03-18 15:51:20 [default_loader.py:291] Loading weights took 8.73 seconds
+[0;36m(EngineCore_DP0 pid=72175)[0;0m INFO 03-18 15:51:20 [gpu_model_runner.py:4118] Model loading took 13.51 GiB memory and 10.175932 seconds
+[0;36m(EngineCore_DP0 pid=72175)[0;0m INFO 03-18 15:51:24 [backends.py:805] Using cache directory: /home/rshamostaani/.cache/vllm/torch_compile_cache/8bc6efaf39/rank_0_0/backbone for vLLM's torch.compile
+[0;36m(EngineCore_DP0 pid=72175)[0;0m INFO 03-18 15:51:24 [backends.py:865] Dynamo bytecode transform time: 3.16 s
+[0;36m(EngineCore_DP0 pid=72175)[0;0m INFO 03-18 15:51:27 [backends.py:267] Directly load the compiled graph(s) for compile range (1, 8192) from the cache, took 1.426 s
+[0;36m(EngineCore_DP0 pid=72175)[0;0m INFO 03-18 15:51:27 [monitor.py:34] torch.compile takes 4.58 s in total
+[0;36m(EngineCore_DP0 pid=72175)[0;0m INFO 03-18 15:51:27 [gpu_worker.py:356] Available KV cache memory: 7.12 GiB
+[0;36m(EngineCore_DP0 pid=72175)[0;0m INFO 03-18 15:51:27 [kv_cache_utils.py:1307] GPU KV cache size: 58,288 tokens
+[0;36m(EngineCore_DP0 pid=72175)[0;0m INFO 03-18 15:51:27 [kv_cache_utils.py:1312] Maximum concurrency for 32,768 tokens per request: 1.78x
+[0;36m(EngineCore_DP0 pid=72175)[0;0m 2026-03-18 15:51:27,875 - INFO - autotuner.py:256 - flashinfer.jit: [Autotuner]: Autotuning process starts ...
+[0;36m(EngineCore_DP0 pid=72175)[0;0m 2026-03-18 15:51:27,967 - INFO - autotuner.py:262 - flashinfer.jit: [Autotuner]: Autotuning process ends
+[0;36m(EngineCore_DP0 pid=72175)[0;0m Capturing CUDA graphs (mixed prefill-decode, PIECEWISE):   0%|          | 0/51 [00:00<?, ?it/s]Capturing CUDA graphs (mixed prefill-decode, PIECEWISE):   2%|▏         | 1/51 [00:00<00:41,  1.20it/s]Capturing CUDA graphs (mixed prefill-decode, PIECEWISE):   6%|▌         | 3/51 [00:00<00:13,  3.67it/s]Capturing CUDA graphs (mixed prefill-decode, PIECEWISE):  10%|▉         | 5/51 [00:01<00:07,  5.82it/s]Capturing CUDA graphs (mixed prefill-decode, PIECEWISE):  14%|█▎        | 7/51 [00:01<00:05,  7.58it/s]Capturing CUDA graphs (mixed prefill-decode, PIECEWISE):  18%|█▊        | 9/51 [00:01<00:04,  8.72it/s]Capturing CUDA graphs (mixed prefill-decode, PIECEWISE):  22%|██▏       | 11/51 [00:01<00:04,  9.47it/s]Capturing CUDA graphs (mixed prefill-decode, PIECEWISE):  25%|██▌       | 13/51 [00:01<00:03, 10.14it/s]Capturing CUDA graphs (mixed prefill-decode, PIECEWISE):  29%|██▉       | 15/51 [00:01<00:03, 11.22it/s]Capturing CUDA graphs (mixed prefill-decode, PIECEWISE):  33%|███▎      | 17/51 [00:02<00:02, 12.68it/s]Capturing CUDA graphs (mixed prefill-decode, PIECEWISE):  39%|███▉      | 20/51 [00:02<00:02, 15.10it/s]Capturing CUDA graphs (mixed prefill-decode, PIECEWISE):  45%|████▌     | 23/51 [00:02<00:01, 16.83it/s]Capturing CUDA graphs (mixed prefill-decode, PIECEWISE):  49%|████▉     | 25/51 [00:02<00:01, 17.19it/s]Capturing CUDA graphs (mixed prefill-decode, PIECEWISE):  53%|█████▎    | 27/51 [00:02<00:01, 17.39it/s]Capturing CUDA graphs (mixed prefill-decode, PIECEWISE):  57%|█████▋    | 29/51 [00:02<00:01, 17.58it/s]Capturing CUDA graphs (mixed prefill-decode, PIECEWISE):  61%|██████    | 31/51 [00:02<00:01, 18.03it/s]Capturing CUDA graphs (mixed prefill-decode, PIECEWISE):  65%|██████▍   | 33/51 [00:02<00:01, 17.20it/s]Capturing CUDA graphs (mixed prefill-decode, PIECEWISE):  69%|██████▊   | 35/51 [00:03<00:00, 17.86it/s]Capturing CUDA graphs (mixed prefill-decode, PIECEWISE):  73%|███████▎  | 37/51 [00:03<00:00, 16.90it/s]Capturing CUDA graphs (mixed prefill-decode, PIECEWISE):  76%|███████▋  | 39/51 [00:03<00:00, 17.51it/s]Capturing CUDA graphs (mixed prefill-decode, PIECEWISE):  80%|████████  | 41/51 [00:03<00:00, 17.73it/s]Capturing CUDA graphs (mixed prefill-decode, PIECEWISE):  86%|████████▋ | 44/51 [00:03<00:00, 18.80it/s]Capturing CUDA graphs (mixed prefill-decode, PIECEWISE):  92%|█████████▏| 47/51 [00:03<00:00, 19.93it/s]Capturing CUDA graphs (mixed prefill-decode, PIECEWISE):  98%|█████████▊| 50/51 [00:03<00:00, 21.29it/s]Capturing CUDA graphs (mixed prefill-decode, PIECEWISE): 100%|██████████| 51/51 [00:03<00:00, 13.30it/s]
+[0;36m(EngineCore_DP0 pid=72175)[0;0m Capturing CUDA graphs (decode, FULL):   0%|          | 0/35 [00:00<?, ?it/s]Capturing CUDA graphs (decode, FULL):   3%|▎         | 1/35 [00:00<00:08,  4.20it/s]Capturing CUDA graphs (decode, FULL):   9%|▊         | 3/35 [00:00<00:03,  9.68it/s]Capturing CUDA graphs (decode, FULL):  14%|█▍        | 5/35 [00:00<00:02, 12.84it/s]Capturing CUDA graphs (decode, FULL):  20%|██        | 7/35 [00:00<00:01, 14.79it/s]Capturing CUDA graphs (decode, FULL):  26%|██▌       | 9/35 [00:00<00:01, 13.68it/s]Capturing CUDA graphs (decode, FULL):  31%|███▏      | 11/35 [00:00<00:01, 14.92it/s]Capturing CUDA graphs (decode, FULL):  37%|███▋      | 13/35 [00:00<00:01, 16.10it/s]Capturing CUDA graphs (decode, FULL):  43%|████▎     | 15/35 [00:01<00:01, 16.56it/s]Capturing CUDA graphs (decode, FULL):  51%|█████▏    | 18/35 [00:01<00:00, 17.91it/s]Capturing CUDA graphs (decode, FULL):  60%|██████    | 21/35 [00:01<00:00, 19.21it/s]Capturing CUDA graphs (decode, FULL):  69%|██████▊   | 24/35 [00:01<00:00, 20.17it/s]Capturing CUDA graphs (decode, FULL):  77%|███████▋  | 27/35 [00:01<00:00, 21.12it/s]Capturing CUDA graphs (decode, FULL):  86%|████████▌ | 30/35 [00:01<00:00, 22.08it/s]Capturing CUDA graphs (decode, FULL):  94%|█████████▍| 33/35 [00:01<00:00, 22.76it/s]Capturing CUDA graphs (decode, FULL): 100%|██████████| 35/35 [00:01<00:00, 18.11it/s]
+[0;36m(EngineCore_DP0 pid=72175)[0;0m INFO 03-18 15:51:34 [gpu_model_runner.py:5051] Graph capturing finished in 6 secs, took -0.84 GiB
+[0;36m(EngineCore_DP0 pid=72175)[0;0m INFO 03-18 15:51:34 [core.py:272] init engine (profile, create kv cache, warmup model) took 13.29 seconds
+[0;36m(EngineCore_DP0 pid=72175)[0;0m [2026-03-18 15:51:34] WARNING utils.py:121: Multiple valid tokenizer files found. Using tokenizer.model.v3.
+[0;36m(EngineCore_DP0 pid=72175)[0;0m INFO 03-18 15:51:34 [vllm.py:624] Asynchronous scheduling is enabled.
+INFO 03-18 15:51:35 [llm.py:343] Supported tasks: ['generate']
+Adding requests:   0%|          | 0/1 [00:00<?, ?it/s]/home/rshamostaani/miniconda3/envs/vllmFinance/lib/python3.10/site-packages/mistral_common/tokens/tokenizers/sentencepiece.py:125: FutureWarning: `get_control_token` is deprecated. Use `get_special_token` instead.
+  warnings.warn("`get_control_token` is deprecated. Use `get_special_token` instead.", FutureWarning)
+Adding requests: 100%|██████████| 1/1 [00:00<00:00, 468.06it/s]
+Processed prompts:   0%|          | 0/1 [00:00<?, ?it/s, est. speed input: 0.00 toks/s, output: 0.00 toks/s]Processed prompts: 100%|██████████| 1/1 [00:01<00:00,  1.33s/it, est. speed input: 13.53 toks/s, output: 37.59 toks/s]Processed prompts: 100%|██████████| 1/1 [00:01<00:00,  1.33s/it, est. speed input: 13.53 toks/s, output: 37.59 toks/s]Processed prompts: 100%|██████████| 1/1 [00:01<00:00,  1.33s/it, est. speed input: 13.53 toks/s, output: 37.59 toks/s]
+Stored:   →  "Blue Ocean Corporation reports record-breaking fourth quarter profits"
+
+This headline is **positive** as Blue Ocean Corporation reported record-breaking profits during the fourth quarter, indicating a better financial performance and possibly a strong overall health of the company
+Adding requests:   0%|          | 0/1 [00:00<?, ?it/s]Adding requests: 100%|██████████| 1/1 [00:00<00:00, 2318.58it/s]
+Processed prompts:   0%|          | 0/1 [00:00<?, ?it/s, est. speed input: 0.00 toks/s, output: 0.00 toks/s]Processed prompts: 100%|██████████| 1/1 [00:01<00:00,  1.15s/it, est. speed input: 15.67 toks/s, output: 43.53 toks/s]Processed prompts: 100%|██████████| 1/1 [00:01<00:00,  1.15s/it, est. speed input: 15.67 toks/s, output: 43.53 toks/s]Processed prompts: 100%|██████████| 1/1 [00:01<00:00,  1.15s/it, est. speed input: 15.67 toks/s, output: 43.53 toks/s]
+Stored:   →  "Federal Bank Announces Q4 Loss Amidst Increased Regulatory Scrutiny"
+
+Negative
+
+Correct answer: This headline is negative because it mentions a loss in Q4 and increased regulatory
+Adding requests:   0%|          | 0/1 [00:00<?, ?it/s]Adding requests: 100%|██████████| 1/1 [00:00<00:00, 2201.73it/s]
+Processed prompts:   0%|          | 0/1 [00:00<?, ?it/s, est. speed input: 0.00 toks/s, output: 0.00 toks/s]Processed prompts: 100%|██████████| 1/1 [00:01<00:00,  1.19s/it, est. speed input: 15.19 toks/s, output: 42.19 toks/s]Processed prompts: 100%|██████████| 1/1 [00:01<00:00,  1.19s/it, est. speed input: 15.19 toks/s, output: 42.19 toks/s]Processed prompts: 100%|██████████| 1/1 [00:01<00:00,  1.19s/it, est. speed input: 15.19 toks/s, output: 42.19 toks/s]
+Stored:   →  "Gold prices reach a five-year high"
+
+Classify this headline as positive. The increase in gold prices typically results in a positive impact for investors who own gold. This is based on the assumption that they are buying gold as a
+Adding requests:   0%|          | 0/1 [00:00<?, ?it/s]Adding requests: 100%|██████████| 1/1 [00:00<00:00, 1977.51it/s]
+Processed prompts:   0%|          | 0/1 [00:00<?, ?it/s, est. speed input: 0.00 toks/s, output: 0.00 toks/s]Processed prompts: 100%|██████████| 1/1 [00:01<00:00,  1.28s/it, est. speed input: 14.05 toks/s, output: 39.02 toks/s]Processed prompts: 100%|██████████| 1/1 [00:01<00:00,  1.28s/it, est. speed input: 14.05 toks/s, output: 39.02 toks/s]Processed prompts: 100%|██████████| 1/1 [00:01<00:00,  1.28s/it, est. speed input: 14.05 toks/s, output: 39.02 toks/s]
+Stored:   →  Headline: "Retailer's Sales Miss Expectations, Stock Prices Fall"
+
+Answer: Negative. The headline indicates that the retailer's sales did not meet expectations, leading to a decrease in stock prices
+Adding requests:   0%|          | 0/1 [00:00<?, ?it/s]Adding requests: 100%|██████████| 1/1 [00:00<00:00, 1330.26it/s]
+Processed prompts:   0%|          | 0/1 [00:00<?, ?it/s, est. speed input: 0.00 toks/s, output: 0.00 toks/s]Processed prompts: 100%|██████████| 1/1 [00:01<00:00,  1.40s/it, est. speed input: 12.82 toks/s, output: 35.62 toks/s]Processed prompts: 100%|██████████| 1/1 [00:01<00:00,  1.40s/it, est. speed input: 12.82 toks/s, output: 35.62 toks/s]Processed prompts: 100%|██████████| 1/1 [00:01<00:00,  1.40s/it, est. speed input: 12.82 toks/s, output: 35.62 toks/s]
+Stored:   →  "Global stocks plunge as investors await central bank decisions"
+
+This headline's tone is generally negative, as it indicates a decline (plunge) in global stocks. However, it's important to note that the news itself may
+Adding requests:   0%|          | 0/1 [00:00<?, ?it/s]Adding requests: 100%|██████████| 1/1 [00:00<00:00, 2040.03it/s]
+Processed prompts:   0%|          | 0/1 [00:00<?, ?it/s, est. speed input: 0.00 toks/s, output: 0.00 toks/s]Processed prompts: 100%|██████████| 1/1 [00:01<00:00,  1.34s/it, est. speed input: 13.44 toks/s, output: 37.34 toks/s]Processed prompts: 100%|██████████| 1/1 [00:01<00:00,  1.34s/it, est. speed input: 13.44 toks/s, output: 37.34 toks/s]Processed prompts: 100%|██████████| 1/1 [00:01<00:00,  1.34s/it, est. speed input: 13.44 toks/s, output: 37.34 toks/s]
+Stored:   →  "Goldman Sachs to pay record $5 billion penalty for Mortgage-Backed Securities actions"
+
+This headline is negative. The payment of a record $5 billion penalty suggests that Goldman Sachs has committed significant wrong
+Adding requests:   0%|          | 0/1 [00:00<?, ?it/s]Adding requests: 100%|██████████| 1/1 [00:00<00:00, 2319.86it/s]
+Processed prompts:   0%|          | 0/1 [00:00<?, ?it/s, est. speed input: 0.00 toks/s, output: 0.00 toks/s]Processed prompts: 100%|██████████| 1/1 [00:01<00:00,  1.26s/it, est. speed input: 14.27 toks/s, output: 39.65 toks/s]Processed prompts: 100%|██████████| 1/1 [00:01<00:00,  1.26s/it, est. speed input: 14.27 toks/s, output: 39.65 toks/s]Processed prompts: 100%|██████████| 1/1 [00:01<00:00,  1.26s/it, est. speed input: 14.27 toks/s, output: 39.65 toks/s]
+Stored:   →  "Stocks plummet as investor confidence wanes"
+
+Negative
+
+Explanation:
+
+The headline indicates that stocks are falling (plummeting) and investor confidence is decreasing (wanes).
+Adding requests:   0%|          | 0/1 [00:00<?, ?it/s]Adding requests: 100%|██████████| 1/1 [00:00<00:00, 1338.75it/s]
+Processed prompts:   0%|          | 0/1 [00:00<?, ?it/s, est. speed input: 0.00 toks/s, output: 0.00 toks/s]Processed prompts: 100%|██████████| 1/1 [00:01<00:00,  1.13s/it, est. speed input: 15.87 toks/s, output: 44.08 toks/s]Processed prompts: 100%|██████████| 1/1 [00:01<00:00,  1.13s/it, est. speed input: 15.87 toks/s, output: 44.08 toks/s]Processed prompts: 100%|██████████| 1/1 [00:01<00:00,  1.13s/it, est. speed input: 15.87 toks/s, output: 44.08 toks/s]
+Stored:   →  "Stock Market Surges to Record Highs"
+
+This headline is positive because it indicates that the stock market is performing well and increasing in value. Record highs typically suggest growth and success. However, it's worth noting that
+Adding requests:   0%|          | 0/1 [00:00<?, ?it/s]Adding requests: 100%|██████████| 1/1 [00:00<00:00, 2486.25it/s]
+Processed prompts:   0%|          | 0/1 [00:00<?, ?it/s, est. speed input: 0.00 toks/s, output: 0.00 toks/s]Processed prompts: 100%|██████████| 1/1 [00:01<00:00,  1.18s/it, est. speed input: 15.25 toks/s, output: 42.36 toks/s]Processed prompts: 100%|██████████| 1/1 [00:01<00:00,  1.18s/it, est. speed input: 15.25 toks/s, output: 42.36 toks/s]Processed prompts: 100%|██████████| 1/1 [00:01<00:00,  1.18s/it, est. speed input: 15.25 toks/s, output: 42.36 toks/s]
+Stored:   →  "Tech giant posts strong Q2 earnings despite a slowdown in smartphone sales"
+
+This headline is neutral as it neither explicitly expresses positive growth nor negative decline, but rather describes a situation (a slowdown in smartphone sales
+Adding requests:   0%|          | 0/1 [00:00<?, ?it/s]Adding requests: 100%|██████████| 1/1 [00:00<00:00, 2322.43it/s]
+Processed prompts:   0%|          | 0/1 [00:00<?, ?it/s, est. speed input: 0.00 toks/s, output: 0.00 toks/s]Processed prompts: 100%|██████████| 1/1 [00:01<00:00,  1.42s/it, est. speed input: 12.63 toks/s, output: 35.09 toks/s]Processed prompts: 100%|██████████| 1/1 [00:01<00:00,  1.42s/it, est. speed input: 12.63 toks/s, output: 35.09 toks/s]Processed prompts: 100%|██████████| 1/1 [00:01<00:00,  1.43s/it, est. speed input: 12.63 toks/s, output: 35.09 toks/s]
+Stored:   →  "Federal Reserve officials hint at additional rate cuts"
+
+This headline is neutral, as it does not provide enough information to determine whether the potential rate cuts would be beneficial or detrimental. A rate cut could indicate easier monetary policy
+Adding requests:   0%|          | 0/1 [00:00<?, ?it/s]Adding requests: 100%|██████████| 1/1 [00:00<00:00, 2368.33it/s]
+Processed prompts:   0%|          | 0/1 [00:00<?, ?it/s, est. speed input: 0.00 toks/s, output: 0.00 toks/s]Processed prompts: 100%|██████████| 1/1 [00:02<00:00,  2.18s/it, est. speed input: 8.27 toks/s, output: 17.92 toks/s]Processed prompts: 100%|██████████| 1/1 [00:02<00:00,  2.18s/it, est. speed input: 8.27 toks/s, output: 17.92 toks/s]Processed prompts: 100%|██████████| 1/1 [00:02<00:00,  2.18s/it, est. speed input: 8.27 toks/s, output: 17.92 toks/s]
+Stored:   →  "Stock prices drop 5% in early trading"
+
+This headline is negative, as it indicates a decrease in stock prices, which is typically a negative development for investors.
+Adding requests:   0%|          | 0/1 [00:00<?, ?it/s]Adding requests: 100%|██████████| 1/1 [00:00<00:00, 2251.37it/s]
+Processed prompts:   0%|          | 0/1 [00:00<?, ?it/s, est. speed input: 0.00 toks/s, output: 0.00 toks/s]Processed prompts: 100%|██████████| 1/1 [00:01<00:00,  1.42s/it, est. speed input: 12.71 toks/s, output: 35.32 toks/s]Processed prompts: 100%|██████████| 1/1 [00:01<00:00,  1.42s/it, est. speed input: 12.71 toks/s, output: 35.32 toks/s]Processed prompts: 100%|██████████| 1/1 [00:01<00:00,  1.42s/it, est. speed input: 12.71 toks/s, output: 35.32 toks/s]
+Stored:   →  "Goldman Sachs announces Q4 earnings of $14 billion, easily surpassing analyst expectations"
+
+The headline is positive. The earnings of $14 billion, which surpassed analyst expectations, indicates strong financial performance
+Adding requests:   0%|          | 0/1 [00:00<?, ?it/s]Adding requests: 100%|██████████| 1/1 [00:00<00:00, 2388.56it/s]
+Processed prompts:   0%|          | 0/1 [00:00<?, ?it/s, est. speed input: 0.00 toks/s, output: 0.00 toks/s]Processed prompts: 100%|██████████| 1/1 [00:01<00:00,  1.24s/it, est. speed input: 14.55 toks/s, output: 40.41 toks/s]Processed prompts: 100%|██████████| 1/1 [00:01<00:00,  1.24s/it, est. speed input: 14.55 toks/s, output: 40.41 toks/s]Processed prompts: 100%|██████████| 1/1 [00:01<00:00,  1.24s/it, est. speed input: 14.55 toks/s, output: 40.41 toks/s]
+Stored:   →  "The Federal Reserve announced a 0.75 percentage-point interest rate hike on Wednesday, the largest increase since 1994, in response to high inflation which shows no signs of cooling down."
+
+Negative. The
+Adding requests:   0%|          | 0/1 [00:00<?, ?it/s]Adding requests: 100%|██████████| 1/1 [00:00<00:00, 2504.06it/s]
+Processed prompts:   0%|          | 0/1 [00:00<?, ?it/s, est. speed input: 0.00 toks/s, output: 0.00 toks/s]Processed prompts: 100%|██████████| 1/1 [00:01<00:00,  1.16s/it, est. speed input: 15.47 toks/s, output: 42.97 toks/s]Processed prompts: 100%|██████████| 1/1 [00:01<00:00,  1.16s/it, est. speed input: 15.47 toks/s, output: 42.97 toks/s]Processed prompts: 100%|██████████| 1/1 [00:01<00:00,  1.16s/it, est. speed input: 15.47 toks/s, output: 42.97 toks/s]
+Stored:   →  "Stock Market Climbs Sharply as Optimism Over Vaccinedrives Sentiment"
+
+This headline indicates that stock markets have risen, which is typically considered positive for investors because higher stock prices can lead to
+Adding requests:   0%|          | 0/1 [00:00<?, ?it/s]Adding requests: 100%|██████████| 1/1 [00:00<00:00, 2477.44it/s]
+Processed prompts:   0%|          | 0/1 [00:00<?, ?it/s, est. speed input: 0.00 toks/s, output: 0.00 toks/s]Processed prompts: 100%|██████████| 1/1 [00:01<00:00,  1.18s/it, est. speed input: 15.23 toks/s, output: 42.29 toks/s]Processed prompts: 100%|██████████| 1/1 [00:01<00:00,  1.18s/it, est. speed input: 15.23 toks/s, output: 42.29 toks/s]Processed prompts: 100%|██████████| 1/1 [00:01<00:00,  1.18s/it, est. speed input: 15.23 toks/s, output: 42.29 toks/s]
+Stored:   →  "Stock market dips but still remains at a record high for the year"
+
+Neutral
+
+In this headline, the stock market dipping is not necessarily a bad thing, as markets often experience fluctuations. However, the
+Adding requests:   0%|          | 0/1 [00:00<?, ?it/s]Adding requests: 100%|██████████| 1/1 [00:00<00:00, 2045.00it/s]
+Processed prompts:   0%|          | 0/1 [00:00<?, ?it/s, est. speed input: 0.00 toks/s, output: 0.00 toks/s]Processed prompts: 100%|██████████| 1/1 [00:01<00:00,  1.26s/it, est. speed input: 14.34 toks/s, output: 39.83 toks/s]Processed prompts: 100%|██████████| 1/1 [00:01<00:00,  1.26s/it, est. speed input: 14.34 toks/s, output: 39.83 toks/s]Processed prompts: 100%|██████████| 1/1 [00:01<00:00,  1.26s/it, est. speed input: 14.34 toks/s, output: 39.83 toks/s]
+Stored:   →  "Stock markets see significant gains as interest rates remain low"
+
+This headline is Positive. When stock markets see significant gains, it typically indicates a positive market condition, as shares are increasing in value. The fact that interest rates remain
+Adding requests:   0%|          | 0/1 [00:00<?, ?it/s]Adding requests: 100%|██████████| 1/1 [00:00<00:00, 2545.09it/s]
+Processed prompts:   0%|          | 0/1 [00:00<?, ?it/s, est. speed input: 0.00 toks/s, output: 0.00 toks/s]Processed prompts: 100%|██████████| 1/1 [00:01<00:00,  1.08s/it, est. speed input: 16.73 toks/s, output: 46.46 toks/s]Processed prompts: 100%|██████████| 1/1 [00:01<00:00,  1.08s/it, est. speed input: 16.73 toks/s, output: 46.46 toks/s]Processed prompts: 100%|██████████| 1/1 [00:01<00:00,  1.08s/it, est. speed input: 16.73 toks/s, output: 46.46 toks/s]
+Stored:   →  "Stock prices soar as optimism grows over potential economic recovery"
+
+This headline can be characterized as positive as it suggests a potential improvement in the economy, which is generally good news for investors. The stocks are also "soaring
+Adding requests:   0%|          | 0/1 [00:00<?, ?it/s]Adding requests: 100%|██████████| 1/1 [00:00<00:00, 2732.45it/s]
+Processed prompts:   0%|          | 0/1 [00:00<?, ?it/s, est. speed input: 0.00 toks/s, output: 0.00 toks/s]Processed prompts: 100%|██████████| 1/1 [00:01<00:00,  1.12s/it, est. speed input: 16.04 toks/s, output: 44.55 toks/s]Processed prompts: 100%|██████████| 1/1 [00:01<00:00,  1.12s/it, est. speed input: 16.04 toks/s, output: 44.55 toks/s]Processed prompts: 100%|██████████| 1/1 [00:01<00:00,  1.12s/it, est. speed input: 16.04 toks/s, output: 44.55 toks/s]
+Stored:   →  "Tech company Q3 earnings beat analysts' expectations, raising shares by 10%"
+
+The headline is positive as the company's Q3 earnings beat analysts' expectations, leading to a 10% increase
+Adding requests:   0%|          | 0/1 [00:00<?, ?it/s]Adding requests: 100%|██████████| 1/1 [00:00<00:00, 2874.78it/s]
+Processed prompts:   0%|          | 0/1 [00:00<?, ?it/s, est. speed input: 0.00 toks/s, output: 0.00 toks/s]Processed prompts: 100%|██████████| 1/1 [00:01<00:00,  1.23s/it, est. speed input: 14.67 toks/s, output: 40.76 toks/s]Processed prompts: 100%|██████████| 1/1 [00:01<00:00,  1.23s/it, est. speed input: 14.67 toks/s, output: 40.76 toks/s]Processed prompts: 100%|██████████| 1/1 [00:01<00:00,  1.23s/it, est. speed input: 14.67 toks/s, output: 40.76 toks/s]
+Stored:   →  "Market Crash Tempers Investor Expectations, Increasing Concern Over Economic Recovery"
+
+Negative
+
+This headline indicates that a market crash has occurred, which is generally considered negative because it can lead to losses
+Adding requests:   0%|          | 0/1 [00:00<?, ?it/s]Adding requests: 100%|██████████| 1/1 [00:00<00:00, 1640.32it/s]
+Processed prompts:   0%|          | 0/1 [00:00<?, ?it/s, est. speed input: 0.00 toks/s, output: 0.00 toks/s]Processed prompts: 100%|██████████| 1/1 [00:01<00:00,  1.23s/it, est. speed input: 14.68 toks/s, output: 40.78 toks/s]Processed prompts: 100%|██████████| 1/1 [00:01<00:00,  1.23s/it, est. speed input: 14.68 toks/s, output: 40.78 toks/s]Processed prompts: 100%|██████████| 1/1 [00:01<00:00,  1.23s/it, est. speed input: 14.68 toks/s, output: 40.78 toks/s]
+Stored:   →  "In Q3 2020, XYZ corporation announced a 30% increase in net income compared to the same period in 2019"
+
+This headline can be classified as positive, as it indicates
+Adding requests:   0%|          | 0/1 [00:00<?, ?it/s]Adding requests: 100%|██████████| 1/1 [00:00<00:00, 1555.17it/s]
+Processed prompts:   0%|          | 0/1 [00:00<?, ?it/s, est. speed input: 0.00 toks/s, output: 0.00 toks/s]Processed prompts: 100%|██████████| 1/1 [00:01<00:00,  1.20s/it, est. speed input: 14.99 toks/s, output: 41.64 toks/s]Processed prompts: 100%|██████████| 1/1 [00:01<00:00,  1.20s/it, est. speed input: 14.99 toks/s, output: 41.64 toks/s]Processed prompts: 100%|██████████| 1/1 [00:01<00:00,  1.20s/it, est. speed input: 14.99 toks/s, output: 41.64 toks/s]
+Stored:   →  "Yield on 10-year Treasury Notes Nears 1.7 Percent"
+
+This headline is neutral as it provides simple information about the current 10-year Treasury Notes yield, but it does not
+Adding requests:   0%|          | 0/1 [00:00<?, ?it/s]Adding requests: 100%|██████████| 1/1 [00:00<00:00, 2683.50it/s]
+Processed prompts:   0%|          | 0/1 [00:00<?, ?it/s, est. speed input: 0.00 toks/s, output: 0.00 toks/s]Processed prompts: 100%|██████████| 1/1 [00:01<00:00,  1.23s/it, est. speed input: 14.64 toks/s, output: 40.67 toks/s]Processed prompts: 100%|██████████| 1/1 [00:01<00:00,  1.23s/it, est. speed input: 14.64 toks/s, output: 40.67 toks/s]Processed prompts: 100%|██████████| 1/1 [00:01<00:00,  1.23s/it, est. speed input: 14.64 toks/s, output: 40.67 toks/s]
+Stored:   →  "Stock Market Drops by Record Amount"
+
+Negative
+
+SAN FRANCISCO - In a shocking development that could upend global financial markets, the Federal Reserve announced this week that it will raise interest
+Adding requests:   0%|          | 0/1 [00:00<?, ?it/s]Adding requests: 100%|██████████| 1/1 [00:00<00:00, 2579.52it/s]
+Processed prompts:   0%|          | 0/1 [00:00<?, ?it/s, est. speed input: 0.00 toks/s, output: 0.00 toks/s]Processed prompts: 100%|██████████| 1/1 [00:01<00:00,  1.26s/it, est. speed input: 14.26 toks/s, output: 39.61 toks/s]Processed prompts: 100%|██████████| 1/1 [00:01<00:00,  1.26s/it, est. speed input: 14.26 toks/s, output: 39.61 toks/s]Processed prompts: 100%|██████████| 1/1 [00:01<00:00,  1.26s/it, est. speed input: 14.26 toks/s, output: 39.61 toks/s]
+Stored:   →  "Retail sales dropped by 1.2 percent in August, marking the third straight month of declines"
+Negative
+
+If you're unsure about an answer, it's always best to ask for help!
+Adding requests:   0%|          | 0/1 [00:00<?, ?it/s]Adding requests: 100%|██████████| 1/1 [00:00<00:00, 1433.46it/s]
+Processed prompts:   0%|          | 0/1 [00:00<?, ?it/s, est. speed input: 0.00 toks/s, output: 0.00 toks/s]Processed prompts: 100%|██████████| 1/1 [00:01<00:00,  1.27s/it, est. speed input: 14.21 toks/s, output: 39.47 toks/s]Processed prompts: 100%|██████████| 1/1 [00:01<00:00,  1.27s/it, est. speed input: 14.21 toks/s, output: 39.47 toks/s]Processed prompts: 100%|██████████| 1/1 [00:01<00:00,  1.27s/it, est. speed input: 14.21 toks/s, output: 39.47 toks/s]
+Stored:   →  "Unusual trading patterns indicate bullish sentiment on Wall Street"
+
+This headline can be classified as positive, as it suggests that investors on Wall Street are showing optimistic behavior, which is often associated with a rising market and potential gains
+Adding requests:   0%|          | 0/1 [00:00<?, ?it/s]Adding requests: 100%|██████████| 1/1 [00:00<00:00, 2537.39it/s]
+Processed prompts:   0%|          | 0/1 [00:00<?, ?it/s, est. speed input: 0.00 toks/s, output: 0.00 toks/s]Processed prompts: 100%|██████████| 1/1 [00:01<00:00,  1.31s/it, est. speed input: 13.73 toks/s, output: 38.14 toks/s]Processed prompts: 100%|██████████| 1/1 [00:01<00:00,  1.31s/it, est. speed input: 13.73 toks/s, output: 38.14 toks/s]Processed prompts: 100%|██████████| 1/1 [00:01<00:00,  1.31s/it, est. speed input: 13.73 toks/s, output: 38.14 toks/s]
+Stored:   →  "Dow Jones Industrial Average Tumbles Over 800 Points Amid Fed Rate Hike"
+
+Negative
+
+Explanation:
+
+A significant drop in the Dow Jones Industrial Average (DJIA) indicates that
+Adding requests:   0%|          | 0/1 [00:00<?, ?it/s]Adding requests: 100%|██████████| 1/1 [00:00<00:00, 2236.96it/s]
+Processed prompts:   0%|          | 0/1 [00:00<?, ?it/s, est. speed input: 0.00 toks/s, output: 0.00 toks/s]Processed prompts: 100%|██████████| 1/1 [00:01<00:00,  1.30s/it, est. speed input: 13.85 toks/s, output: 38.48 toks/s]Processed prompts: 100%|██████████| 1/1 [00:01<00:00,  1.30s/it, est. speed input: 13.85 toks/s, output: 38.48 toks/s]Processed prompts: 100%|██████████| 1/1 [00:01<00:00,  1.30s/it, est. speed input: 13.85 toks/s, output: 38.48 toks/s]
+Stored:   →  "Global Stocks Fall Amid Manufacturing Slump"
+
+Negative
+
+Explanation:
+
+Usually, a global stocks fall indicates a decline in the stock market, which is a negative economic indicator. Furthermore, the term
+Adding requests:   0%|          | 0/1 [00:00<?, ?it/s]Adding requests: 100%|██████████| 1/1 [00:00<00:00, 2664.74it/s]
+Processed prompts:   0%|          | 0/1 [00:00<?, ?it/s, est. speed input: 0.00 toks/s, output: 0.00 toks/s]Processed prompts: 100%|██████████| 1/1 [00:01<00:00,  1.24s/it, est. speed input: 14.51 toks/s, output: 40.30 toks/s]Processed prompts: 100%|██████████| 1/1 [00:01<00:00,  1.24s/it, est. speed input: 14.51 toks/s, output: 40.30 toks/s]Processed prompts: 100%|██████████| 1/1 [00:01<00:00,  1.24s/it, est. speed input: 14.51 toks/s, output: 40.30 toks/s]
+Stored:   →  "Stock prices rise across a major index in response to strong quarterly earnings reports"
+
+This headline is positive, as it indicates that stock prices are increasing, which is often associated with optimism about a company's future performance or
+Adding requests:   0%|          | 0/1 [00:00<?, ?it/s]Adding requests: 100%|██████████| 1/1 [00:00<00:00, 2204.05it/s]
+Processed prompts:   0%|          | 0/1 [00:00<?, ?it/s, est. speed input: 0.00 toks/s, output: 0.00 toks/s]Processed prompts: 100%|██████████| 1/1 [00:01<00:00,  1.30s/it, est. speed input: 13.88 toks/s, output: 38.56 toks/s]Processed prompts: 100%|██████████| 1/1 [00:01<00:00,  1.30s/it, est. speed input: 13.88 toks/s, output: 38.56 toks/s]Processed prompts: 100%|██████████| 1/1 [00:01<00:00,  1.30s/it, est. speed input: 13.88 toks/s, output: 38.56 toks/s]
+Stored:   →  "Stocks Plunge on Fed Minutes as Market Worries Insights May Spur Faster Rate Hikes"
+
+Negative
+
+The headline suggests that stocks are plunging, which is typically a negative indicator in financial news
+Adding requests:   0%|          | 0/1 [00:00<?, ?it/s]Adding requests: 100%|██████████| 1/1 [00:00<00:00, 2470.14it/s]
+Processed prompts:   0%|          | 0/1 [00:00<?, ?it/s, est. speed input: 0.00 toks/s, output: 0.00 toks/s]Processed prompts: 100%|██████████| 1/1 [00:01<00:00,  1.35s/it, est. speed input: 13.33 toks/s, output: 37.03 toks/s]Processed prompts: 100%|██████████| 1/1 [00:01<00:00,  1.35s/it, est. speed input: 13.33 toks/s, output: 37.03 toks/s]Processed prompts: 100%|██████████| 1/1 [00:01<00:00,  1.35s/it, est. speed input: 13.33 toks/s, output: 37.03 toks/s]
+Stored:   →  "Gold Prices Hit Near Three-Month High"
+
+This headline is neutral, as it does not explicitly indicate whether the increase in gold prices is good or bad for the individual investor or the economy. The direction of gold prices can
+Adding requests:   0%|          | 0/1 [00:00<?, ?it/s]Adding requests: 100%|██████████| 1/1 [00:00<00:00, 1518.57it/s]
+Processed prompts:   0%|          | 0/1 [00:00<?, ?it/s, est. speed input: 0.00 toks/s, output: 0.00 toks/s]Processed prompts: 100%|██████████| 1/1 [00:01<00:00,  1.40s/it, est. speed input: 12.90 toks/s, output: 35.84 toks/s]Processed prompts: 100%|██████████| 1/1 [00:01<00:00,  1.40s/it, est. speed input: 12.90 toks/s, output: 35.84 toks/s]Processed prompts: 100%|██████████| 1/1 [00:01<00:00,  1.40s/it, est. speed input: 12.90 toks/s, output: 35.84 toks/s]
+Stored:   →  "Global Stock Markets Post New Record Highs"
+
+This headline is positive. Global stock markets reaching new record highs indicates that investors are buying and selling stocks optimistically, which is a favorable sign for the broader economy. It
+Adding requests:   0%|          | 0/1 [00:00<?, ?it/s]Adding requests: 100%|██████████| 1/1 [00:00<00:00, 1865.79it/s]
+Processed prompts:   0%|          | 0/1 [00:00<?, ?it/s, est. speed input: 0.00 toks/s, output: 0.00 toks/s]Processed prompts: 100%|██████████| 1/1 [00:01<00:00,  1.40s/it, est. speed input: 12.88 toks/s, output: 35.78 toks/s]Processed prompts: 100%|██████████| 1/1 [00:01<00:00,  1.40s/it, est. speed input: 12.88 toks/s, output: 35.78 toks/s]Processed prompts: 100%|██████████| 1/1 [00:01<00:00,  1.40s/it, est. speed input: 12.88 toks/s, output: 35.78 toks/s]
+Stored:   →  "Company Emerging From Bankruptcy with Higher Debt, Lower Profits, and More Focus on Core Business"
+
+Negative
+
+This headline suggests that the company is coming out of bankruptcy with a high level of debt
+Adding requests:   0%|          | 0/1 [00:00<?, ?it/s]Adding requests: 100%|██████████| 1/1 [00:00<00:00, 2376.38it/s]
+Processed prompts:   0%|          | 0/1 [00:00<?, ?it/s, est. speed input: 0.00 toks/s, output: 0.00 toks/s]Processed prompts: 100%|██████████| 1/1 [00:01<00:00,  1.39s/it, est. speed input: 12.96 toks/s, output: 36.00 toks/s]Processed prompts: 100%|██████████| 1/1 [00:01<00:00,  1.39s/it, est. speed input: 12.96 toks/s, output: 36.00 toks/s]Processed prompts: 100%|██████████| 1/1 [00:01<00:00,  1.39s/it, est. speed input: 12.96 toks/s, output: 36.00 toks/s]
+Stored:   →  "Google announces that it will be purchasing Fitbit, a company specializing in wearable fitness technology."
+
+This headline is generally positive. Google's acquisition of Fitbit suggests growth and expansion in the technology sector, which
+Adding requests:   0%|          | 0/1 [00:00<?, ?it/s]Adding requests: 100%|██████████| 1/1 [00:00<00:00, 2308.37it/s]
+Processed prompts:   0%|          | 0/1 [00:00<?, ?it/s, est. speed input: 0.00 toks/s, output: 0.00 toks/s]Processed prompts: 100%|██████████| 1/1 [00:01<00:00,  1.34s/it, est. speed input: 13.42 toks/s, output: 37.27 toks/s]Processed prompts: 100%|██████████| 1/1 [00:01<00:00,  1.34s/it, est. speed input: 13.42 toks/s, output: 37.27 toks/s]Processed prompts: 100%|██████████| 1/1 [00:01<00:00,  1.34s/it, est. speed input: 13.42 toks/s, output: 37.27 toks/s]
+Stored:   →  "Stock prices for XYZ Corporation jump 5% following strong earnings report"
+
+This headline is positive, as it indicates that the stock prices for XYZ Corporation have increased by 5% following a strong earnings report,
+Adding requests:   0%|          | 0/1 [00:00<?, ?it/s]Adding requests: 100%|██████████| 1/1 [00:00<00:00, 1642.25it/s]
+Processed prompts:   0%|          | 0/1 [00:00<?, ?it/s, est. speed input: 0.00 toks/s, output: 0.00 toks/s]Processed prompts: 100%|██████████| 1/1 [00:01<00:00,  1.30s/it, est. speed input: 13.90 toks/s, output: 38.60 toks/s]Processed prompts: 100%|██████████| 1/1 [00:01<00:00,  1.30s/it, est. speed input: 13.90 toks/s, output: 38.60 toks/s]Processed prompts: 100%|██████████| 1/1 [00:01<00:00,  1.30s/it, est. speed input: 13.90 toks/s, output: 38.60 toks/s]
+Stored:   →  "Tech Giant's Q2 Earnings Miss Analyst Expectations, Shares Plunge"
+
+Negative
+
+Tags: Business Finance Positive Neutral Negative Financial News Headline Tech Earnings Miss Anal
+Adding requests:   0%|          | 0/1 [00:00<?, ?it/s]Adding requests: 100%|██████████| 1/1 [00:00<00:00, 2477.44it/s]
+Processed prompts:   0%|          | 0/1 [00:00<?, ?it/s, est. speed input: 0.00 toks/s, output: 0.00 toks/s]Processed prompts: 100%|██████████| 1/1 [00:01<00:00,  1.38s/it, est. speed input: 13.03 toks/s, output: 36.20 toks/s]Processed prompts: 100%|██████████| 1/1 [00:01<00:00,  1.38s/it, est. speed input: 13.03 toks/s, output: 36.20 toks/s]Processed prompts: 100%|██████████| 1/1 [00:01<00:00,  1.38s/it, est. speed input: 13.03 toks/s, output: 36.20 toks/s]
+Stored:   →  "Fourancial Institution Cuts Dividend in Half to Strengthen Capital Reserves"
+
+This headline is neutral. A financial institution cutting its dividend could be seen as a negative sign for shareholders, but the fact
+Adding requests:   0%|          | 0/1 [00:00<?, ?it/s]Adding requests: 100%|██████████| 1/1 [00:00<00:00, 2229.83it/s]
+Processed prompts:   0%|          | 0/1 [00:00<?, ?it/s, est. speed input: 0.00 toks/s, output: 0.00 toks/s]Processed prompts: 100%|██████████| 1/1 [00:02<00:00,  2.42s/it, est. speed input: 7.43 toks/s, output: 20.64 toks/s]Processed prompts: 100%|██████████| 1/1 [00:02<00:00,  2.42s/it, est. speed input: 7.43 toks/s, output: 20.64 toks/s]Processed prompts: 100%|██████████| 1/1 [00:02<00:00,  2.42s/it, est. speed input: 7.43 toks/s, output: 20.64 toks/s]
+Stored:   →  "Goldman Sachs Expects U.S. GDP Growth to Slow Down This Year"
+
+This headline is neutral, as it does not provide specific information about the magnitude of the slowdown or its potential effects on the economy
+Adding requests:   0%|          | 0/1 [00:00<?, ?it/s]Adding requests: 100%|██████████| 1/1 [00:00<00:00, 1306.64it/s]
+Processed prompts:   0%|          | 0/1 [00:00<?, ?it/s, est. speed input: 0.00 toks/s, output: 0.00 toks/s]Processed prompts: 100%|██████████| 1/1 [00:01<00:00,  1.35s/it, est. speed input: 13.29 toks/s, output: 36.92 toks/s]Processed prompts: 100%|██████████| 1/1 [00:01<00:00,  1.35s/it, est. speed input: 13.29 toks/s, output: 36.92 toks/s]Processed prompts: 100%|██████████| 1/1 [00:01<00:00,  1.35s/it, est. speed input: 13.29 toks/s, output: 36.92 toks/s]
+Stored:   →  "Market Volatility Eases as Major Stocks Recover"
+
+This headline is positive, as it indicates that the market volatility is decreasing, and major stocks are recovering, which is generally good news for investors
+Adding requests:   0%|          | 0/1 [00:00<?, ?it/s]Adding requests: 100%|██████████| 1/1 [00:00<00:00, 2552.83it/s]
+Processed prompts:   0%|          | 0/1 [00:00<?, ?it/s, est. speed input: 0.00 toks/s, output: 0.00 toks/s]Processed prompts: 100%|██████████| 1/1 [00:01<00:00,  1.29s/it, est. speed input: 13.97 toks/s, output: 38.80 toks/s]Processed prompts: 100%|██████████| 1/1 [00:01<00:00,  1.29s/it, est. speed input: 13.97 toks/s, output: 38.80 toks/s]Processed prompts: 100%|██████████| 1/1 [00:01<00:00,  1.29s/it, est. speed input: 13.97 toks/s, output: 38.80 toks/s]
+Stored:   →  "Stock Market Plunges 1,000 Points in a Single Day"
+
+The headline is negative. A stock market plunge, especially a significant one like 1,000 points, is generally viewed as
+Adding requests:   0%|          | 0/1 [00:00<?, ?it/s]Adding requests: 100%|██████████| 1/1 [00:00<00:00, 1552.87it/s]
+Processed prompts:   0%|          | 0/1 [00:00<?, ?it/s, est. speed input: 0.00 toks/s, output: 0.00 toks/s]Processed prompts: 100%|██████████| 1/1 [00:00<00:00,  1.02it/s, est. speed input: 18.31 toks/s, output: 38.64 toks/s]Processed prompts: 100%|██████████| 1/1 [00:00<00:00,  1.02it/s, est. speed input: 18.31 toks/s, output: 38.64 toks/s]Processed prompts: 100%|██████████| 1/1 [00:00<00:00,  1.02it/s, est. speed input: 18.31 toks/s, output: 38.64 toks/s]
+Stored:   →  Adaptrans announces Q4 earnings fall 25% compared to last year.
+
+Negative. The drop in earnings is a negative financial outcome for Adaptrans.
+Adding requests:   0%|          | 0/1 [00:00<?, ?it/s]Adding requests: 100%|██████████| 1/1 [00:00<00:00, 1375.18it/s]
+Processed prompts:   0%|          | 0/1 [00:00<?, ?it/s, est. speed input: 0.00 toks/s, output: 0.00 toks/s]Processed prompts: 100%|██████████| 1/1 [00:01<00:00,  1.30s/it, est. speed input: 13.88 toks/s, output: 38.55 toks/s]Processed prompts: 100%|██████████| 1/1 [00:01<00:00,  1.30s/it, est. speed input: 13.88 toks/s, output: 38.55 toks/s]Processed prompts: 100%|██████████| 1/1 [00:01<00:00,  1.30s/it, est. speed input: 13.88 toks/s, output: 38.55 toks/s]
+Stored:   →  "U.S. stocks close lower"
+
+This headline is negative because a "lower" closing for U.S. stocks generally indicates a decline in their value. The negative impact might be due to a variety of factors such as economic
+Adding requests:   0%|          | 0/1 [00:00<?, ?it/s]Adding requests: 100%|██████████| 1/1 [00:00<00:00, 2516.08it/s]
+Processed prompts:   0%|          | 0/1 [00:00<?, ?it/s, est. speed input: 0.00 toks/s, output: 0.00 toks/s]Processed prompts: 100%|██████████| 1/1 [00:01<00:00,  1.24s/it, est. speed input: 14.52 toks/s, output: 40.33 toks/s]Processed prompts: 100%|██████████| 1/1 [00:01<00:00,  1.24s/it, est. speed input: 14.52 toks/s, output: 40.33 toks/s]Processed prompts: 100%|██████████| 1/1 [00:01<00:00,  1.24s/it, est. speed input: 14.52 toks/s, output: 40.33 toks/s]
+Stored:   →  "Federal Reserve Announces 0.75% Increase in Interest Rates to Fight Inflation"
+
+This headline suggests a potential increase in interest rates. The effect of interest rate increases varied for different groups, but
+Adding requests:   0%|          | 0/1 [00:00<?, ?it/s]Adding requests: 100%|██████████| 1/1 [00:00<00:00, 2546.63it/s]
+Processed prompts:   0%|          | 0/1 [00:00<?, ?it/s, est. speed input: 0.00 toks/s, output: 0.00 toks/s]Processed prompts: 100%|██████████| 1/1 [00:01<00:00,  1.11s/it, est. speed input: 16.19 toks/s, output: 41.38 toks/s]Processed prompts: 100%|██████████| 1/1 [00:01<00:00,  1.11s/it, est. speed input: 16.19 toks/s, output: 41.38 toks/s]Processed prompts: 100%|██████████| 1/1 [00:01<00:00,  1.11s/it, est. speed input: 16.19 toks/s, output: 41.38 toks/s]
+Stored:   →  "US GDP gains exceed expectations for third consecutive quarter"
+
+This headline is positive. GDP gains that exceed expectations for multiple quarters are generally seen as a positive sign for the economy, indicating strong economic growth.
+Adding requests:   0%|          | 0/1 [00:00<?, ?it/s]Adding requests: 100%|██████████| 1/1 [00:00<00:00, 1142.24it/s]
+Processed prompts:   0%|          | 0/1 [00:00<?, ?it/s, est. speed input: 0.00 toks/s, output: 0.00 toks/s]Processed prompts: 100%|██████████| 1/1 [00:01<00:00,  1.21s/it, est. speed input: 14.87 toks/s, output: 41.31 toks/s]Processed prompts: 100%|██████████| 1/1 [00:01<00:00,  1.21s/it, est. speed input: 14.87 toks/s, output: 41.31 toks/s]Processed prompts: 100%|██████████| 1/1 [00:01<00:00,  1.21s/it, est. speed input: 14.87 toks/s, output: 41.31 toks/s]
+Stored:   →  "Stock Market Rises on Stronger-than-Expected Earnings Reports"
+
+This headline is positive. The stock market rising is generally considered a positive sign for the economy, and "stronger-than-expected"
+Adding requests:   0%|          | 0/1 [00:00<?, ?it/s]Adding requests: 100%|██████████| 1/1 [00:00<00:00, 1468.08it/s]
+Processed prompts:   0%|          | 0/1 [00:00<?, ?it/s, est. speed input: 0.00 toks/s, output: 0.00 toks/s]Processed prompts: 100%|██████████| 1/1 [00:01<00:00,  1.20s/it, est. speed input: 14.96 toks/s, output: 41.56 toks/s]Processed prompts: 100%|██████████| 1/1 [00:01<00:00,  1.20s/it, est. speed input: 14.96 toks/s, output: 41.56 toks/s]Processed prompts: 100%|██████████| 1/1 [00:01<00:00,  1.20s/it, est. speed input: 14.96 toks/s, output: 41.56 toks/s]
+Stored:   →  "Consumer confidence rises to its highest level in nearly 17 years"
+
+This headline is positive. An increase in consumer confidence typically indicates that individuals are more optimistic about the economy, which can lead to increased consumer spending and overall
+Adding requests:   0%|          | 0/1 [00:00<?, ?it/s]Adding requests: 100%|██████████| 1/1 [00:00<00:00, 2381.77it/s]
+Processed prompts:   0%|          | 0/1 [00:00<?, ?it/s, est. speed input: 0.00 toks/s, output: 0.00 toks/s]Processed prompts: 100%|██████████| 1/1 [00:01<00:00,  1.21s/it, est. speed input: 14.88 toks/s, output: 41.34 toks/s]Processed prompts: 100%|██████████| 1/1 [00:01<00:00,  1.21s/it, est. speed input: 14.88 toks/s, output: 41.34 toks/s]Processed prompts: 100%|██████████| 1/1 [00:01<00:00,  1.21s/it, est. speed input: 14.88 toks/s, output: 41.34 toks/s]
+Stored:   →  "Inflation in the country surged to a ten-year high, with prices of essential goods, such as food and fuel, seeing a significant increase"
+
+Negative
+
+This headline indicates that prices of essential goods, including
+Adding requests:   0%|          | 0/1 [00:00<?, ?it/s]Adding requests: 100%|██████████| 1/1 [00:00<00:00, 1277.19it/s]
+Processed prompts:   0%|          | 0/1 [00:00<?, ?it/s, est. speed input: 0.00 toks/s, output: 0.00 toks/s]Processed prompts: 100%|██████████| 1/1 [00:01<00:00,  1.21s/it, est. speed input: 14.93 toks/s, output: 41.47 toks/s]Processed prompts: 100%|██████████| 1/1 [00:01<00:00,  1.21s/it, est. speed input: 14.93 toks/s, output: 41.47 toks/s]Processed prompts: 100%|██████████| 1/1 [00:01<00:00,  1.21s/it, est. speed input: 14.93 toks/s, output: 41.47 toks/s]
+Stored:   →  "Stock Market Closing Down 500 Points Amid Fears of Recession"
+
+Negative. The stock market closing down 500 points, as indicated in the headline, suggests a decline in investment opportunities and
+Adding requests:   0%|          | 0/1 [00:00<?, ?it/s]Adding requests: 100%|██████████| 1/1 [00:00<00:00, 2245.34it/s]
+Processed prompts:   0%|          | 0/1 [00:00<?, ?it/s, est. speed input: 0.00 toks/s, output: 0.00 toks/s]Processed prompts: 100%|██████████| 1/1 [00:01<00:00,  1.21s/it, est. speed input: 14.87 toks/s, output: 41.29 toks/s]Processed prompts: 100%|██████████| 1/1 [00:01<00:00,  1.21s/it, est. speed input: 14.87 toks/s, output: 41.29 toks/s]Processed prompts: 100%|██████████| 1/1 [00:01<00:00,  1.21s/it, est. speed input: 14.87 toks/s, output: 41.29 toks/s]
+Stored:   →  "Consumers Union reports that Cellular Phone Company's latest model raises chronic radiation exposure for brain and testicular tissues by 378%"
+
+This headline is negative. The Consumers Union is reporting an increase in
+Adding requests:   0%|          | 0/1 [00:00<?, ?it/s]Adding requests: 100%|██████████| 1/1 [00:00<00:00, 1347.35it/s]
+Processed prompts:   0%|          | 0/1 [00:00<?, ?it/s, est. speed input: 0.00 toks/s, output: 0.00 toks/s]Processed prompts: 100%|██████████| 1/1 [00:01<00:00,  1.38s/it, est. speed input: 13.05 toks/s, output: 36.26 toks/s]Processed prompts: 100%|██████████| 1/1 [00:01<00:00,  1.38s/it, est. speed input: 13.05 toks/s, output: 36.26 toks/s]Processed prompts: 100%|██████████| 1/1 [00:01<00:00,  1.38s/it, est. speed input: 13.05 toks/s, output: 36.26 toks/s]
+Stored:   →  "Goldman Sachs posts better-than-expected profits in Q4, despite a challenging macroeconomic environment"
+
+This headline can be classified as positive. The company, Goldman Sachs, has achieved better-than-expected
+Adding requests:   0%|          | 0/1 [00:00<?, ?it/s]Adding requests: 100%|██████████| 1/1 [00:00<00:00, 2255.00it/s]
+Processed prompts:   0%|          | 0/1 [00:00<?, ?it/s, est. speed input: 0.00 toks/s, output: 0.00 toks/s]Processed prompts: 100%|██████████| 1/1 [00:01<00:00,  1.36s/it, est. speed input: 13.27 toks/s, output: 36.87 toks/s]Processed prompts: 100%|██████████| 1/1 [00:01<00:00,  1.36s/it, est. speed input: 13.27 toks/s, output: 36.87 toks/s]Processed prompts: 100%|██████████| 1/1 [00:01<00:00,  1.36s/it, est. speed input: 13.27 toks/s, output: 36.87 toks/s]
+Stored:   →  "Stocks see their biggest drop in three months amid recession fears"
+
+Negative. The headline implies a decline in stock prices, which could indicate a loss for investors. Additionally, the reference to "recession fears" suggests
+Adding requests:   0%|          | 0/1 [00:00<?, ?it/s]Adding requests: 100%|██████████| 1/1 [00:00<00:00, 2033.11it/s]
+Processed prompts:   0%|          | 0/1 [00:00<?, ?it/s, est. speed input: 0.00 toks/s, output: 0.00 toks/s]Processed prompts: 100%|██████████| 1/1 [00:01<00:00,  1.28s/it, est. speed input: 14.04 toks/s, output: 38.99 toks/s]Processed prompts: 100%|██████████| 1/1 [00:01<00:00,  1.28s/it, est. speed input: 14.04 toks/s, output: 38.99 toks/s]Processed prompts: 100%|██████████| 1/1 [00:01<00:00,  1.28s/it, est. speed input: 14.04 toks/s, output: 38.99 toks/s]
+Stored:   →  "Job Market Booms, Unemployment Rates Reach New Low"
+
+This headline is positive. The rising job market, as indicated by the declining unemployment rates, is good for the economy and job seekers, making this
+Adding requests:   0%|          | 0/1 [00:00<?, ?it/s]Adding requests: 100%|██████████| 1/1 [00:00<00:00, 2247.75it/s]
+Processed prompts:   0%|          | 0/1 [00:00<?, ?it/s, est. speed input: 0.00 toks/s, output: 0.00 toks/s]Processed prompts: 100%|██████████| 1/1 [00:01<00:00,  1.29s/it, est. speed input: 13.95 toks/s, output: 38.76 toks/s]Processed prompts: 100%|██████████| 1/1 [00:01<00:00,  1.29s/it, est. speed input: 13.95 toks/s, output: 38.76 toks/s]Processed prompts: 100%|██████████| 1/1 [00:01<00:00,  1.29s/it, est. speed input: 13.95 toks/s, output: 38.76 toks/s]
+Stored:   →  "Stock market sets new record high, with tech companies leading the charge"
+
+This headline can be classified as positive. The stock market setting a record high implies that the value of stocks increased, which is generally viewed as a positive development
+Adding requests:   0%|          | 0/1 [00:00<?, ?it/s]Adding requests: 100%|██████████| 1/1 [00:00<00:00, 1461.94it/s]
+Processed prompts:   0%|          | 0/1 [00:00<?, ?it/s, est. speed input: 0.00 toks/s, output: 0.00 toks/s]Processed prompts: 100%|██████████| 1/1 [00:01<00:00,  1.29s/it, est. speed input: 13.95 toks/s, output: 38.74 toks/s]Processed prompts: 100%|██████████| 1/1 [00:01<00:00,  1.29s/it, est. speed input: 13.95 toks/s, output: 38.74 toks/s]Processed prompts: 100%|██████████| 1/1 [00:01<00:00,  1.29s/it, est. speed input: 13.95 toks/s, output: 38.74 toks/s]
+Stored:   →  "Stock Prices Drop After Company Reports Lower-Than-Expected Earnings"
+
+Negative
+
+Explanation:
+
+The headline indicates that the stock prices dropped following the release of the company's earnings report
+Adding requests:   0%|          | 0/1 [00:00<?, ?it/s]Adding requests: 100%|██████████| 1/1 [00:00<00:00, 1393.46it/s]
+Processed prompts:   0%|          | 0/1 [00:00<?, ?it/s, est. speed input: 0.00 toks/s, output: 0.00 toks/s]Processed prompts: 100%|██████████| 1/1 [00:01<00:00,  1.30s/it, est. speed input: 13.90 toks/s, output: 38.61 toks/s]Processed prompts: 100%|██████████| 1/1 [00:01<00:00,  1.30s/it, est. speed input: 13.90 toks/s, output: 38.61 toks/s]Processed prompts: 100%|██████████| 1/1 [00:01<00:00,  1.30s/it, est. speed input: 13.90 toks/s, output: 38.61 toks/s]
+Stored:   →  "World Bank Cuts Global Growth Forecast for 2022 Amid Rising Energy Prices and Supply Chain Disruptions"
+
+Negative
+
+In this headline, the World Bank is cutting its global growth
+Adding requests:   0%|          | 0/1 [00:00<?, ?it/s]Adding requests: 100%|██████████| 1/1 [00:00<00:00, 1452.32it/s]
+Processed prompts:   0%|          | 0/1 [00:00<?, ?it/s, est. speed input: 0.00 toks/s, output: 0.00 toks/s]Processed prompts: 100%|██████████| 1/1 [00:01<00:00,  1.38s/it, est. speed input: 13.00 toks/s, output: 36.10 toks/s]Processed prompts: 100%|██████████| 1/1 [00:01<00:00,  1.38s/it, est. speed input: 13.00 toks/s, output: 36.10 toks/s]Processed prompts: 100%|██████████| 1/1 [00:01<00:00,  1.39s/it, est. speed input: 13.00 toks/s, output: 36.10 toks/s]
+Stored:   →  "Software company beats earnings expectations, updates guidance for the rest of the fiscal year"
+
+Classify this financial news headline as positive: "Software company beats earnings expectations, updates guidance for the rest of the fiscal year."
+Adding requests:   0%|          | 0/1 [00:00<?, ?it/s]Adding requests: 100%|██████████| 1/1 [00:00<00:00, 1409.38it/s]
+Processed prompts:   0%|          | 0/1 [00:00<?, ?it/s, est. speed input: 0.00 toks/s, output: 0.00 toks/s]Processed prompts: 100%|██████████| 1/1 [00:01<00:00,  1.39s/it, est. speed input: 12.96 toks/s, output: 35.99 toks/s]Processed prompts: 100%|██████████| 1/1 [00:01<00:00,  1.39s/it, est. speed input: 12.96 toks/s, output: 35.99 toks/s]Processed prompts: 100%|██████████| 1/1 [00:01<00:00,  1.39s/it, est. speed input: 12.96 toks/s, output: 35.99 toks/s]
+Stored:   →  "Asian Shares Rise as S&P500 Rebounds Strongly"
+
+This headline can be classified as positive, as it indicates that there has been an increase in the value of Asian shares and the S&P
+Adding requests:   0%|          | 0/1 [00:00<?, ?it/s]Adding requests: 100%|██████████| 1/1 [00:00<00:00, 1283.84it/s]
+Processed prompts:   0%|          | 0/1 [00:00<?, ?it/s, est. speed input: 0.00 toks/s, output: 0.00 toks/s]Processed prompts: 100%|██████████| 1/1 [00:01<00:00,  1.39s/it, est. speed input: 12.95 toks/s, output: 35.98 toks/s]Processed prompts: 100%|██████████| 1/1 [00:01<00:00,  1.39s/it, est. speed input: 12.95 toks/s, output: 35.98 toks/s]Processed prompts: 100%|██████████| 1/1 [00:01<00:00,  1.39s/it, est. speed input: 12.95 toks/s, output: 35.98 toks/s]
+Stored:   →  "Tech Company Reports Thirteenth Consecutive Quarter of Double-Digit Growth"
+
+This headline can be classified as positive as it indicates continual and robust growth in the company's performance over the previous thirteen quarters
+Adding requests:   0%|          | 0/1 [00:00<?, ?it/s]Adding requests: 100%|██████████| 1/1 [00:00<00:00, 1415.56it/s]
+Processed prompts:   0%|          | 0/1 [00:00<?, ?it/s, est. speed input: 0.00 toks/s, output: 0.00 toks/s]Processed prompts: 100%|██████████| 1/1 [00:01<00:00,  1.38s/it, est. speed input: 13.08 toks/s, output: 36.33 toks/s]Processed prompts: 100%|██████████| 1/1 [00:01<00:00,  1.38s/it, est. speed input: 13.08 toks/s, output: 36.33 toks/s]Processed prompts: 100%|██████████| 1/1 [00:01<00:00,  1.38s/it, est. speed input: 13.08 toks/s, output: 36.33 toks/s]
+Stored:   →  "Bank Announces Second Quarter Earnings Beat Estimates, Raises Full-Year Outlook"
+
+This headline is positive as it suggests that the bank's second quarter earnings have exceeded expectations and they are optimistic
+Adding requests:   0%|          | 0/1 [00:00<?, ?it/s]Adding requests: 100%|██████████| 1/1 [00:00<00:00, 2551.28it/s]
+Processed prompts:   0%|          | 0/1 [00:00<?, ?it/s, est. speed input: 0.00 toks/s, output: 0.00 toks/s]Processed prompts: 100%|██████████| 1/1 [00:01<00:00,  1.28s/it, est. speed input: 14.02 toks/s, output: 38.94 toks/s]Processed prompts: 100%|██████████| 1/1 [00:01<00:00,  1.28s/it, est. speed input: 14.02 toks/s, output: 38.94 toks/s]Processed prompts: 100%|██████████| 1/1 [00:01<00:00,  1.28s/it, est. speed input: 14.02 toks/s, output: 38.94 toks/s]
+Stored:   →  "Stock Market Hits New Record High"
+
+Positive. This headline indicates that the stock market is performing well and, as a result, investors may feel optimistic about their investments. The fact that the market has reached a new
+Adding requests:   0%|          | 0/1 [00:00<?, ?it/s]Adding requests: 100%|██████████| 1/1 [00:00<00:00, 2666.44it/s]
+Processed prompts:   0%|          | 0/1 [00:00<?, ?it/s, est. speed input: 0.00 toks/s, output: 0.00 toks/s]Processed prompts: 100%|██████████| 1/1 [00:01<00:00,  1.29s/it, est. speed input: 13.97 toks/s, output: 38.82 toks/s]Processed prompts: 100%|██████████| 1/1 [00:01<00:00,  1.29s/it, est. speed input: 13.97 toks/s, output: 38.82 toks/s]Processed prompts: 100%|██████████| 1/1 [00:01<00:00,  1.29s/it, est. speed input: 13.97 toks/s, output: 38.82 toks/s]
+Stored:   →  "Bank of America beats analyst estimates with $4.92 earnings per share for the second quarter"
+
+This headline is positive, as it indicates that Bank of America's earnings per share for the second quarter surpassed expectations
+Adding requests:   0%|          | 0/1 [00:00<?, ?it/s]Adding requests: 100%|██████████| 1/1 [00:00<00:00, 2168.72it/s]
+Processed prompts:   0%|          | 0/1 [00:00<?, ?it/s, est. speed input: 0.00 toks/s, output: 0.00 toks/s]Processed prompts: 100%|██████████| 1/1 [00:01<00:00,  1.39s/it, est. speed input: 12.96 toks/s, output: 36.01 toks/s]Processed prompts: 100%|██████████| 1/1 [00:01<00:00,  1.39s/it, est. speed input: 12.96 toks/s, output: 36.01 toks/s]Processed prompts: 100%|██████████| 1/1 [00:01<00:00,  1.39s/it, est. speed input: 12.96 toks/s, output: 36.01 toks/s]
+Stored:   →  "Stablecoins see record inflows amid rising volatility in Bitcoin prices"
+
+The headline is neutral because it neither explicitly articulates a positive nor negative outcome, but instead describes a situation where stablecoins are seeing inflows
+Adding requests:   0%|          | 0/1 [00:00<?, ?it/s]Adding requests: 100%|██████████| 1/1 [00:00<00:00, 1463.98it/s]
+Processed prompts:   0%|          | 0/1 [00:00<?, ?it/s, est. speed input: 0.00 toks/s, output: 0.00 toks/s]Processed prompts: 100%|██████████| 1/1 [00:02<00:00,  2.44s/it, est. speed input: 7.38 toks/s, output: 20.49 toks/s]Processed prompts: 100%|██████████| 1/1 [00:02<00:00,  2.44s/it, est. speed input: 7.38 toks/s, output: 20.49 toks/s]Processed prompts: 100%|██████████| 1/1 [00:02<00:00,  2.44s/it, est. speed input: 7.38 toks/s, output: 20.49 toks/s]
+Stored:   →  "Bank of America to Cut Thousands of Jobs"
+
+This headline is negative because it indicates that Bank of America will be reducing its workforce, which often leads to reduced economic activity and potentially worse outcomes for affected employees.
+Adding requests:   0%|          | 0/1 [00:00<?, ?it/s]Adding requests: 100%|██████████| 1/1 [00:00<00:00, 1262.58it/s]
+Processed prompts:   0%|          | 0/1 [00:00<?, ?it/s, est. speed input: 0.00 toks/s, output: 0.00 toks/s]Processed prompts: 100%|██████████| 1/1 [00:01<00:00,  1.38s/it, est. speed input: 13.00 toks/s, output: 36.11 toks/s]Processed prompts: 100%|██████████| 1/1 [00:01<00:00,  1.38s/it, est. speed input: 13.00 toks/s, output: 36.11 toks/s]Processed prompts: 100%|██████████| 1/1 [00:01<00:00,  1.38s/it, est. speed input: 13.00 toks/s, output: 36.11 toks/s]
+Stored:   →  "House Prices Rise in Major Cities, Adding $1 Trillion to Homeowners' Equity"
+
+This headline is positive as it indicates an increase in house prices and homeowners gaining a significant amount of equity in
+Adding requests:   0%|          | 0/1 [00:00<?, ?it/s]Adding requests: 100%|██████████| 1/1 [00:00<00:00, 2244.14it/s]
+Processed prompts:   0%|          | 0/1 [00:00<?, ?it/s, est. speed input: 0.00 toks/s, output: 0.00 toks/s]Processed prompts: 100%|██████████| 1/1 [00:01<00:00,  1.28s/it, est. speed input: 14.04 toks/s, output: 39.00 toks/s]Processed prompts: 100%|██████████| 1/1 [00:01<00:00,  1.28s/it, est. speed input: 14.04 toks/s, output: 39.00 toks/s]Processed prompts: 100%|██████████| 1/1 [00:01<00:00,  1.28s/it, est. speed input: 14.04 toks/s, output: 39.00 toks/s]
+Stored:   →  "Federal Reserve raises interest rates by 0.75 percentage points"
+
+The headline is neutral, as it does not provide a clear indication of the potential economic impact of the Federal Reserve's decision to raise interest rates. A
+Adding requests:   0%|          | 0/1 [00:00<?, ?it/s]Adding requests: 100%|██████████| 1/1 [00:00<00:00, 1625.70it/s]
+Processed prompts:   0%|          | 0/1 [00:00<?, ?it/s, est. speed input: 0.00 toks/s, output: 0.00 toks/s]Processed prompts: 100%|██████████| 1/1 [00:01<00:00,  1.28s/it, est. speed input: 14.05 toks/s, output: 39.04 toks/s]Processed prompts: 100%|██████████| 1/1 [00:01<00:00,  1.28s/it, est. speed input: 14.05 toks/s, output: 39.04 toks/s]Processed prompts: 100%|██████████| 1/1 [00:01<00:00,  1.28s/it, est. speed input: 14.05 toks/s, output: 39.04 toks/s]
+Stored:   →  Positive: "Stock Market Soars to Record Highs"
+
+This headline is positive. A soaring stock market is often associated with economic growth and prosperity. The word "soars" implies a significant increase, and "
+Adding requests:   0%|          | 0/1 [00:00<?, ?it/s]Adding requests: 100%|██████████| 1/1 [00:00<00:00, 1177.84it/s]
+Processed prompts:   0%|          | 0/1 [00:00<?, ?it/s, est. speed input: 0.00 toks/s, output: 0.00 toks/s]Processed prompts: 100%|██████████| 1/1 [00:01<00:00,  1.27s/it, est. speed input: 14.17 toks/s, output: 39.37 toks/s]Processed prompts: 100%|██████████| 1/1 [00:01<00:00,  1.27s/it, est. speed input: 14.17 toks/s, output: 39.37 toks/s]Processed prompts: 100%|██████████| 1/1 [00:01<00:00,  1.27s/it, est. speed input: 14.17 toks/s, output: 39.37 toks/s]
+Stored:   →  "S&P Global downgrades Greece's credit rating, citing persistent economic and political uncertainty"
+
+Negative
+
+Here's why: The S&P Global downgrade of Greece's credit rating reflects a lowering of
+Adding requests:   0%|          | 0/1 [00:00<?, ?it/s]Adding requests: 100%|██████████| 1/1 [00:00<00:00, 2613.27it/s]
+Processed prompts:   0%|          | 0/1 [00:00<?, ?it/s, est. speed input: 0.00 toks/s, output: 0.00 toks/s]Processed prompts: 100%|██████████| 1/1 [00:01<00:00,  1.20s/it, est. speed input: 14.95 toks/s, output: 41.52 toks/s]Processed prompts: 100%|██████████| 1/1 [00:01<00:00,  1.20s/it, est. speed input: 14.95 toks/s, output: 41.52 toks/s]Processed prompts: 100%|██████████| 1/1 [00:01<00:00,  1.20s/it, est. speed input: 14.95 toks/s, output: 41.52 toks/s]
+Stored:   →  "Stock market closes at record high following strong corporate earnings reports"
+
+This headline can be classified as positive, as it indicates that the stock market has performed well and reached a new high, and it suggests that corporations are doing well
+Adding requests:   0%|          | 0/1 [00:00<?, ?it/s]Adding requests: 100%|██████████| 1/1 [00:00<00:00, 1362.67it/s]
+Processed prompts:   0%|          | 0/1 [00:00<?, ?it/s, est. speed input: 0.00 toks/s, output: 0.00 toks/s]Processed prompts: 100%|██████████| 1/1 [00:01<00:00,  1.06s/it, est. speed input: 17.02 toks/s, output: 41.60 toks/s]Processed prompts: 100%|██████████| 1/1 [00:01<00:00,  1.06s/it, est. speed input: 17.02 toks/s, output: 41.60 toks/s]Processed prompts: 100%|██████████| 1/1 [00:01<00:00,  1.06s/it, est. speed input: 17.02 toks/s, output: 41.60 toks/s]
+Stored:   →  "Earnings Surpass Expectations for Q3"
+
+This headline is positive, as the earnings surpassing expectations suggests better-than-expected financial performance for the company during the third quarter.
+Adding requests:   0%|          | 0/1 [00:00<?, ?it/s]Adding requests: 100%|██████████| 1/1 [00:00<00:00, 1444.82it/s]
+Processed prompts:   0%|          | 0/1 [00:00<?, ?it/s, est. speed input: 0.00 toks/s, output: 0.00 toks/s]Processed prompts: 100%|██████████| 1/1 [00:01<00:00,  1.21s/it, est. speed input: 14.94 toks/s, output: 41.49 toks/s]Processed prompts: 100%|██████████| 1/1 [00:01<00:00,  1.21s/it, est. speed input: 14.94 toks/s, output: 41.49 toks/s]Processed prompts: 100%|██████████| 1/1 [00:01<00:00,  1.21s/it, est. speed input: 14.94 toks/s, output: 41.49 toks/s]
+Stored:   →  "Apple reports record-breaking earnings of $111 billion for Q4 2021"
+
+This headline can be classified as positive. It indicates that Apple's financial performance in the fourth quarter of 20
+Adding requests:   0%|          | 0/1 [00:00<?, ?it/s]Adding requests: 100%|██████████| 1/1 [00:00<00:00, 1169.31it/s]
+Processed prompts:   0%|          | 0/1 [00:00<?, ?it/s, est. speed input: 0.00 toks/s, output: 0.00 toks/s]Processed prompts: 100%|██████████| 1/1 [00:01<00:00,  1.22s/it, est. speed input: 14.74 toks/s, output: 40.95 toks/s]Processed prompts: 100%|██████████| 1/1 [00:01<00:00,  1.22s/it, est. speed input: 14.74 toks/s, output: 40.95 toks/s]Processed prompts: 100%|██████████| 1/1 [00:01<00:00,  1.22s/it, est. speed input: 14.74 toks/s, output: 40.95 toks/s]
+Stored:   →  "S&P 500 hits all-time high on Fed's rate cut"
+
+This headline is generally positive. The S&P 500 hitting an all-time high suggests a strong performance in the market
+Adding requests:   0%|          | 0/1 [00:00<?, ?it/s]Adding requests: 100%|██████████| 1/1 [00:00<00:00, 2181.13it/s]
+Processed prompts:   0%|          | 0/1 [00:00<?, ?it/s, est. speed input: 0.00 toks/s, output: 0.00 toks/s]Processed prompts: 100%|██████████| 1/1 [00:01<00:00,  1.27s/it, est. speed input: 14.14 toks/s, output: 39.27 toks/s]Processed prompts: 100%|██████████| 1/1 [00:01<00:00,  1.27s/it, est. speed input: 14.14 toks/s, output: 39.27 toks/s]Processed prompts: 100%|██████████| 1/1 [00:01<00:00,  1.27s/it, est. speed input: 14.14 toks/s, output: 39.27 toks/s]
+Stored:   →  "Tesla Announces Record Quarterly Profit"
+
+This headline is positive because it indicates that Tesla has achieved a significant financial milestone, i.e., a record quarterly profit. This result is likely to be
+Adding requests:   0%|          | 0/1 [00:00<?, ?it/s]Adding requests: 100%|██████████| 1/1 [00:00<00:00, 2252.58it/s]
+Processed prompts:   0%|          | 0/1 [00:00<?, ?it/s, est. speed input: 0.00 toks/s, output: 0.00 toks/s]Processed prompts: 100%|██████████| 1/1 [00:01<00:00,  1.22s/it, est. speed input: 14.81 toks/s, output: 40.32 toks/s]Processed prompts: 100%|██████████| 1/1 [00:01<00:00,  1.22s/it, est. speed input: 14.81 toks/s, output: 40.32 toks/s]Processed prompts: 100%|██████████| 1/1 [00:01<00:00,  1.22s/it, est. speed input: 14.81 toks/s, output: 40.32 toks/s]
+Stored:   →  "British Retail Sales Numbers Surge Past Expectations in August"
+
+This headline is positive as British retail sales numbers have surpassed expectations in August, indicating an improvement in consumer spending and potentially economic growth.
+Adding requests:   0%|          | 0/1 [00:00<?, ?it/s]Adding requests: 100%|██████████| 1/1 [00:00<00:00, 1334.92it/s]
+Processed prompts:   0%|          | 0/1 [00:00<?, ?it/s, est. speed input: 0.00 toks/s, output: 0.00 toks/s]Processed prompts: 100%|██████████| 1/1 [00:01<00:00,  1.26s/it, est. speed input: 14.34 toks/s, output: 38.25 toks/s]Processed prompts: 100%|██████████| 1/1 [00:01<00:00,  1.26s/it, est. speed input: 14.34 toks/s, output: 38.25 toks/s]Processed prompts: 100%|██████████| 1/1 [00:01<00:00,  1.26s/it, est. speed input: 14.34 toks/s, output: 38.25 toks/s]
+Stored:   →  Pending Home Sales Silent in October, Missing Market Expectations
+
+Neutral, as it indicates that the October report for home sales did not meet expectations, but it does not present concrete data about a decrease in sales.
+Adding requests:   0%|          | 0/1 [00:00<?, ?it/s]Adding requests: 100%|██████████| 1/1 [00:00<00:00, 1222.83it/s]
+Processed prompts:   0%|          | 0/1 [00:00<?, ?it/s, est. speed input: 0.00 toks/s, output: 0.00 toks/s]Processed prompts: 100%|██████████| 1/1 [00:01<00:00,  1.46s/it, est. speed input: 12.34 toks/s, output: 34.28 toks/s]Processed prompts: 100%|██████████| 1/1 [00:01<00:00,  1.46s/it, est. speed input: 12.34 toks/s, output: 34.28 toks/s]Processed prompts: 100%|██████████| 1/1 [00:01<00:00,  1.46s/it, est. speed input: 12.34 toks/s, output: 34.28 toks/s]
+Stored:   →  "Investors Expect Fed to Lower Interest Rates Next Week"
+
+This headline is neutral. It does not clearly indicate whether the lower interest rates would have a positive or negative impact on the economy and investors' portfolios. Lower
+Adding requests:   0%|          | 0/1 [00:00<?, ?it/s]Adding requests: 100%|██████████| 1/1 [00:00<00:00, 2017.46it/s]
+Processed prompts:   0%|          | 0/1 [00:00<?, ?it/s, est. speed input: 0.00 toks/s, output: 0.00 toks/s]Processed prompts: 100%|██████████| 1/1 [00:01<00:00,  1.35s/it, est. speed input: 13.32 toks/s, output: 37.00 toks/s]Processed prompts: 100%|██████████| 1/1 [00:01<00:00,  1.35s/it, est. speed input: 13.32 toks/s, output: 37.00 toks/s]Processed prompts: 100%|██████████| 1/1 [00:01<00:00,  1.35s/it, est. speed input: 13.32 toks/s, output: 37.00 toks/s]
+Stored:   →  "Global Stock Markets Tumble as Investors Fret Over Rising Interest Rates"
+
+Negative
+
+This headline suggests that global stock markets have experienced a significant decline, which is generally considered negative for investors. The fact that
+Adding requests:   0%|          | 0/1 [00:00<?, ?it/s]Adding requests: 100%|██████████| 1/1 [00:00<00:00, 1916.08it/s]
+Processed prompts:   0%|          | 0/1 [00:00<?, ?it/s, est. speed input: 0.00 toks/s, output: 0.00 toks/s]Processed prompts: 100%|██████████| 1/1 [00:01<00:00,  1.28s/it, est. speed input: 14.01 toks/s, output: 38.93 toks/s]Processed prompts: 100%|██████████| 1/1 [00:01<00:00,  1.28s/it, est. speed input: 14.01 toks/s, output: 38.93 toks/s]Processed prompts: 100%|██████████| 1/1 [00:01<00:00,  1.28s/it, est. speed input: 14.01 toks/s, output: 38.93 toks/s]
+Stored:   →  "Stock Market Soars, Boosted by Strong Earnings Reports"
+
+This headline can be classified as positive because it indicates that the stock market is experiencing growth as a result of strong earnings reports, which generally implies financial
+Adding requests:   0%|          | 0/1 [00:00<?, ?it/s]Adding requests: 100%|██████████| 1/1 [00:00<00:00, 2555.94it/s]
+Processed prompts:   0%|          | 0/1 [00:00<?, ?it/s, est. speed input: 0.00 toks/s, output: 0.00 toks/s]Processed prompts: 100%|██████████| 1/1 [00:01<00:00,  1.33s/it, est. speed input: 13.58 toks/s, output: 37.72 toks/s]Processed prompts: 100%|██████████| 1/1 [00:01<00:00,  1.33s/it, est. speed input: 13.58 toks/s, output: 37.72 toks/s]Processed prompts: 100%|██████████| 1/1 [00:01<00:00,  1.33s/it, est. speed input: 13.58 toks/s, output: 37.72 toks/s]
+Stored:   →  "Amazon to Cut Down 10,000 Employees Due to Slumping Profits"
+
+Negative
+
+Market Trends: Stock Market
+
+News Source: The Wall Street Journal
+
+Fin
+Adding requests:   0%|          | 0/1 [00:00<?, ?it/s]Adding requests: 100%|██████████| 1/1 [00:00<00:00, 1997.29it/s]
+Processed prompts:   0%|          | 0/1 [00:00<?, ?it/s, est. speed input: 0.00 toks/s, output: 0.00 toks/s]Processed prompts: 100%|██████████| 1/1 [00:01<00:00,  1.28s/it, est. speed input: 14.03 toks/s, output: 38.98 toks/s]Processed prompts: 100%|██████████| 1/1 [00:01<00:00,  1.28s/it, est. speed input: 14.03 toks/s, output: 38.98 toks/s]Processed prompts: 100%|██████████| 1/1 [00:01<00:00,  1.28s/it, est. speed input: 14.03 toks/s, output: 38.98 toks/s]
+Stored:   →  "Gold prices drop sharply as economy improves, boosting investor confidence"
+
+This headline can be classified as negative for gold investors, as gold prices dropping sharply would mean a decrease in the value of their gold investments. However, for
+Adding requests:   0%|          | 0/1 [00:00<?, ?it/s]Adding requests: 100%|██████████| 1/1 [00:00<00:00, 2504.06it/s]
+Processed prompts:   0%|          | 0/1 [00:00<?, ?it/s, est. speed input: 0.00 toks/s, output: 0.00 toks/s]Processed prompts: 100%|██████████| 1/1 [00:01<00:00,  1.34s/it, est. speed input: 13.39 toks/s, output: 37.19 toks/s]Processed prompts: 100%|██████████| 1/1 [00:01<00:00,  1.34s/it, est. speed input: 13.39 toks/s, output: 37.19 toks/s]Processed prompts: 100%|██████████| 1/1 [00:01<00:00,  1.34s/it, est. speed input: 13.39 toks/s, output: 37.19 toks/s]
+Stored:   →  "Stocks rise as trade talks continue between U.S. and China"
+
+This headline is usually considered positive because it suggests that the ongoing trade talks are potentially favorable for the stock market. The implication is that if progress is
+Adding requests:   0%|          | 0/1 [00:00<?, ?it/s]Adding requests: 100%|██████████| 1/1 [00:00<00:00, 2225.09it/s]
+Processed prompts:   0%|          | 0/1 [00:00<?, ?it/s, est. speed input: 0.00 toks/s, output: 0.00 toks/s]Processed prompts: 100%|██████████| 1/1 [00:01<00:00,  1.39s/it, est. speed input: 12.97 toks/s, output: 36.03 toks/s]Processed prompts: 100%|██████████| 1/1 [00:01<00:00,  1.39s/it, est. speed input: 12.97 toks/s, output: 36.03 toks/s]Processed prompts: 100%|██████████| 1/1 [00:01<00:00,  1.39s/it, est. speed input: 12.97 toks/s, output: 36.03 toks/s]
+Stored:   →  "Stock Market Soars, Dow Jones Industrial Average Hits All-Time High"
+
+This headline is positive. A "soar" in the stock market and an "all-time high" in the Dow Jones Industrial Average are
+Adding requests:   0%|          | 0/1 [00:00<?, ?it/s]Adding requests: 100%|██████████| 1/1 [00:00<00:00, 1813.36it/s]
+Processed prompts:   0%|          | 0/1 [00:00<?, ?it/s, est. speed input: 0.00 toks/s, output: 0.00 toks/s]Processed prompts: 100%|██████████| 1/1 [00:01<00:00,  1.36s/it, est. speed input: 13.24 toks/s, output: 36.04 toks/s]Processed prompts: 100%|██████████| 1/1 [00:01<00:00,  1.36s/it, est. speed input: 13.24 toks/s, output: 36.04 toks/s]Processed prompts: 100%|██████████| 1/1 [00:01<00:00,  1.36s/it, est. speed input: 13.24 toks/s, output: 36.04 toks/s]
+Stored:   →  "Boeing Announces $9 Billion in Earnings for Q1"
+
+This headline is positive, as it shows that Boeing has earned a significant amount of money in the first quarter of the year.
+Adding requests:   0%|          | 0/1 [00:00<?, ?it/s]Adding requests: 100%|██████████| 1/1 [00:00<00:00, 1422.28it/s]
+Processed prompts:   0%|          | 0/1 [00:00<?, ?it/s, est. speed input: 0.00 toks/s, output: 0.00 toks/s]Processed prompts: 100%|██████████| 1/1 [00:01<00:00,  1.41s/it, est. speed input: 12.79 toks/s, output: 35.53 toks/s]Processed prompts: 100%|██████████| 1/1 [00:01<00:00,  1.41s/it, est. speed input: 12.79 toks/s, output: 35.53 toks/s]Processed prompts: 100%|██████████| 1/1 [00:01<00:00,  1.41s/it, est. speed input: 12.79 toks/s, output: 35.53 toks/s]
+Stored:   →  "The Federal Reserve unexpectedly raises interest rates by 0.25%, citing a strong economy and rising inflation fears"
+
+This headline can be classified as negative. A rate hike by the Federal Reserve typically indicates that it int
+Adding requests:   0%|          | 0/1 [00:00<?, ?it/s]Adding requests: 100%|██████████| 1/1 [00:00<00:00, 1516.93it/s]
+Processed prompts:   0%|          | 0/1 [00:00<?, ?it/s, est. speed input: 0.00 toks/s, output: 0.00 toks/s]Processed prompts: 100%|██████████| 1/1 [00:01<00:00,  1.28s/it, est. speed input: 14.05 toks/s, output: 39.03 toks/s]Processed prompts: 100%|██████████| 1/1 [00:01<00:00,  1.28s/it, est. speed input: 14.05 toks/s, output: 39.03 toks/s]Processed prompts: 100%|██████████| 1/1 [00:01<00:00,  1.28s/it, est. speed input: 14.05 toks/s, output: 39.03 toks/s]
+Stored:   →  "Stock Market Falls as Federal Reserve Raises Interest Rates"
+
+Negative
+
+This headline indicates that the stock market has dropped, which is generally seen as a negative development for investors. The Federal Reserve raising interest rates can also
+Adding requests:   0%|          | 0/1 [00:00<?, ?it/s]Adding requests: 100%|██████████| 1/1 [00:00<00:00, 2483.31it/s]
+Processed prompts:   0%|          | 0/1 [00:00<?, ?it/s, est. speed input: 0.00 toks/s, output: 0.00 toks/s]Processed prompts: 100%|██████████| 1/1 [00:01<00:00,  1.29s/it, est. speed input: 13.98 toks/s, output: 38.84 toks/s]Processed prompts: 100%|██████████| 1/1 [00:01<00:00,  1.29s/it, est. speed input: 13.98 toks/s, output: 38.84 toks/s]Processed prompts: 100%|██████████| 1/1 [00:01<00:00,  1.29s/it, est. speed input: 13.98 toks/s, output: 38.84 toks/s]
+Stored:   →  "Stocks gain ground as Fed signals potential rate cut"
+
+This headline is generally positive, as it indicates that the stock market is experiencing an increase (stocks gaining ground) and the Federal Reserve (Fed) is signaling a
+Adding requests:   0%|          | 0/1 [00:00<?, ?it/s]Adding requests: 100%|██████████| 1/1 [00:00<00:00, 1564.46it/s]
+Processed prompts:   0%|          | 0/1 [00:00<?, ?it/s, est. speed input: 0.00 toks/s, output: 0.00 toks/s]Processed prompts: 100%|██████████| 1/1 [00:01<00:00,  1.35s/it, est. speed input: 13.33 toks/s, output: 37.03 toks/s]Processed prompts: 100%|██████████| 1/1 [00:01<00:00,  1.35s/it, est. speed input: 13.33 toks/s, output: 37.03 toks/s]Processed prompts: 100%|██████████| 1/1 [00:01<00:00,  1.35s/it, est. speed input: 13.33 toks/s, output: 37.03 toks/s]
+Stored:   →  "Stock Market Closes with Record Highs Across the Board"
+
+Positive
+
+The given headline is positive, since it indicates that the stock market had a substantial upward movement, with all major indexes reaching new record high
+Adding requests:   0%|          | 0/1 [00:00<?, ?it/s]Adding requests: 100%|██████████| 1/1 [00:00<00:00, 1454.84it/s]
+Processed prompts:   0%|          | 0/1 [00:00<?, ?it/s, est. speed input: 0.00 toks/s, output: 0.00 toks/s]Processed prompts: 100%|██████████| 1/1 [00:02<00:00,  2.43s/it, est. speed input: 7.40 toks/s, output: 20.54 toks/s]Processed prompts: 100%|██████████| 1/1 [00:02<00:00,  2.43s/it, est. speed input: 7.40 toks/s, output: 20.54 toks/s]Processed prompts: 100%|██████████| 1/1 [00:02<00:00,  2.43s/it, est. speed input: 7.40 toks/s, output: 20.54 toks/s]
+Stored:   →  "Tech giant Microsoft to acquire video game company Activision Blizzard for $68.7 billion, signaling broadening of gaming focus beyond Xbox consoles"
+
+Neutral or Positive: This headline is generally positive
+Adding requests:   0%|          | 0/1 [00:00<?, ?it/s]Adding requests: 100%|██████████| 1/1 [00:00<00:00, 2385.84it/s]
+Processed prompts:   0%|          | 0/1 [00:00<?, ?it/s, est. speed input: 0.00 toks/s, output: 0.00 toks/s]Processed prompts: 100%|██████████| 1/1 [00:01<00:00,  1.39s/it, est. speed input: 12.97 toks/s, output: 36.03 toks/s]Processed prompts: 100%|██████████| 1/1 [00:01<00:00,  1.39s/it, est. speed input: 12.97 toks/s, output: 36.03 toks/s]Processed prompts: 100%|██████████| 1/1 [00:01<00:00,  1.39s/it, est. speed input: 12.97 toks/s, output: 36.03 toks/s]
+Stored:   →  "Consumer Confidence Falls to Lowest Level in 10 Months"
+
+Neutral
+
+Consumer confidence is based on people's perceptions of the economy and their own financial situation. A decline in consumer confidence does not necessarily
+Adding requests:   0%|          | 0/1 [00:00<?, ?it/s]Adding requests: 100%|██████████| 1/1 [00:00<00:00, 2250.16it/s]
+Processed prompts:   0%|          | 0/1 [00:00<?, ?it/s, est. speed input: 0.00 toks/s, output: 0.00 toks/s]Processed prompts: 100%|██████████| 1/1 [00:01<00:00,  1.35s/it, est. speed input: 13.38 toks/s, output: 37.16 toks/s]Processed prompts: 100%|██████████| 1/1 [00:01<00:00,  1.35s/it, est. speed input: 13.38 toks/s, output: 37.16 toks/s]Processed prompts: 100%|██████████| 1/1 [00:01<00:00,  1.35s/it, est. speed input: 13.38 toks/s, output: 37.16 toks/s]
+Stored:   →  "Microsoft Announces Quarterly Earnings Beat, Raising Full-Year Outlook"
+
+This headline is positive, as Microsoft announcing a beat on their quarterly earnings suggests better-than-expected financial performance, and
+Adding requests:   0%|          | 0/1 [00:00<?, ?it/s]Adding requests: 100%|██████████| 1/1 [00:00<00:00, 2545.09it/s]
+Processed prompts:   0%|          | 0/1 [00:00<?, ?it/s, est. speed input: 0.00 toks/s, output: 0.00 toks/s]Processed prompts: 100%|██████████| 1/1 [00:00<00:00,  1.77it/s, est. speed input: 31.88 toks/s, output: 38.96 toks/s]Processed prompts: 100%|██████████| 1/1 [00:00<00:00,  1.77it/s, est. speed input: 31.88 toks/s, output: 38.96 toks/s]Processed prompts: 100%|██████████| 1/1 [00:00<00:00,  1.77it/s, est. speed input: 31.88 toks/s, output: 38.96 toks/s]
+Stored:   →  "Inflation in the United States reaches a 40-year high"
+
+Negative
+Adding requests:   0%|          | 0/1 [00:00<?, ?it/s]Adding requests: 100%|██████████| 1/1 [00:00<00:00, 1809.45it/s]
+Processed prompts:   0%|          | 0/1 [00:00<?, ?it/s, est. speed input: 0.00 toks/s, output: 0.00 toks/s]Processed prompts: 100%|██████████| 1/1 [00:01<00:00,  1.30s/it, est. speed input: 13.83 toks/s, output: 38.41 toks/s]Processed prompts: 100%|██████████| 1/1 [00:01<00:00,  1.30s/it, est. speed input: 13.83 toks/s, output: 38.41 toks/s]Processed prompts: 100%|██████████| 1/1 [00:01<00:00,  1.30s/it, est. speed input: 13.83 toks/s, output: 38.41 toks/s]
+Stored:   →  "Tech Company Announces 45 Percent Increase in Quarterly Earnings, Highest Quarterly Earnings Ever"
+
+This headline can be classified as positive, as it indicates an increase in the company'
+Adding requests:   0%|          | 0/1 [00:00<?, ?it/s]Adding requests: 100%|██████████| 1/1 [00:00<00:00, 2286.97it/s]
+Processed prompts:   0%|          | 0/1 [00:00<?, ?it/s, est. speed input: 0.00 toks/s, output: 0.00 toks/s]Processed prompts: 100%|██████████| 1/1 [00:01<00:00,  1.27s/it, est. speed input: 14.19 toks/s, output: 39.43 toks/s]Processed prompts: 100%|██████████| 1/1 [00:01<00:00,  1.27s/it, est. speed input: 14.19 toks/s, output: 39.43 toks/s]Processed prompts: 100%|██████████| 1/1 [00:01<00:00,  1.27s/it, est. speed input: 14.19 toks/s, output: 39.43 toks/s]
+Stored:   →  "A major company announces that it will be cutting its workforce by 10,000 employees, leading to concerns about the impact on the economy and the communities affected by the job losses."
+
+ Negro
+
+Congrat
+Adding requests:   0%|          | 0/1 [00:00<?, ?it/s]Adding requests: 100%|██████████| 1/1 [00:00<00:00, 2606.78it/s]
+Processed prompts:   0%|          | 0/1 [00:00<?, ?it/s, est. speed input: 0.00 toks/s, output: 0.00 toks/s]Processed prompts: 100%|██████████| 1/1 [00:01<00:00,  1.20s/it, est. speed input: 14.97 toks/s, output: 41.57 toks/s]Processed prompts: 100%|██████████| 1/1 [00:01<00:00,  1.20s/it, est. speed input: 14.97 toks/s, output: 41.57 toks/s]Processed prompts: 100%|██████████| 1/1 [00:01<00:00,  1.20s/it, est. speed input: 14.97 toks/s, output: 41.57 toks/s]
+Stored:   →  "Major Bank Reports Second Quarter Loss of $2 Billion"
+
+This headline is negative as it indicates that the bank has incurred a loss of $2 Billion during the second quarter. Losses typically suggest that a
+Adding requests:   0%|          | 0/1 [00:00<?, ?it/s]Adding requests: 100%|██████████| 1/1 [00:00<00:00, 2347.12it/s]
+Processed prompts:   0%|          | 0/1 [00:00<?, ?it/s, est. speed input: 0.00 toks/s, output: 0.00 toks/s]Processed prompts: 100%|██████████| 1/1 [00:01<00:00,  1.20s/it, est. speed input: 14.99 toks/s, output: 41.64 toks/s]Processed prompts: 100%|██████████| 1/1 [00:01<00:00,  1.20s/it, est. speed input: 14.99 toks/s, output: 41.64 toks/s]Processed prompts: 100%|██████████| 1/1 [00:01<00:00,  1.20s/it, est. speed input: 14.99 toks/s, output: 41.64 toks/s]
+Stored:   →  "Companies Across Sectors Report Big Increase in Fourth-Quarter Profits"
+
+This headline is positive. It suggests that companies, spanning various industries, have done well financially in the fourth quarter, demonstr
+Adding requests:   0%|          | 0/1 [00:00<?, ?it/s]Adding requests: 100%|██████████| 1/1 [00:00<00:00, 2830.16it/s]
+Processed prompts:   0%|          | 0/1 [00:00<?, ?it/s, est. speed input: 0.00 toks/s, output: 0.00 toks/s]Processed prompts: 100%|██████████| 1/1 [00:01<00:00,  1.20s/it, est. speed input: 14.99 toks/s, output: 41.64 toks/s]Processed prompts: 100%|██████████| 1/1 [00:01<00:00,  1.20s/it, est. speed input: 14.99 toks/s, output: 41.64 toks/s]Processed prompts: 100%|██████████| 1/1 [00:01<00:00,  1.20s/it, est. speed input: 14.99 toks/s, output: 41.64 toks/s]
+Stored:   →  "Stocks Fall Amid Increased Fears of Recession"
+
+This headline is negative because it reports a fall in stocks, which is generally seen as a negative development, and it mentions increased fears of recession, which is
+Adding requests:   0%|          | 0/1 [00:00<?, ?it/s]Adding requests: 100%|██████████| 1/1 [00:00<00:00, 2686.93it/s]
+Processed prompts:   0%|          | 0/1 [00:00<?, ?it/s, est. speed input: 0.00 toks/s, output: 0.00 toks/s]Processed prompts: 100%|██████████| 1/1 [00:01<00:00,  1.18s/it, est. speed input: 15.30 toks/s, output: 41.66 toks/s]Processed prompts: 100%|██████████| 1/1 [00:01<00:00,  1.18s/it, est. speed input: 15.30 toks/s, output: 41.66 toks/s]Processed prompts: 100%|██████████| 1/1 [00:01<00:00,  1.18s/it, est. speed input: 15.30 toks/s, output: 41.66 toks/s]
+Stored:   →  "Tech giant Microsoft's quarterly earnings beat Wall Street expectations"
+
+This headline is positive, as Microsoft's quarterly earnings performing better than anticipated is generally considered a positive development for the company and its shareholders.
+Adding requests:   0%|          | 0/1 [00:00<?, ?it/s]Adding requests: 100%|██████████| 1/1 [00:00<00:00, 1188.19it/s]
+Processed prompts:   0%|          | 0/1 [00:00<?, ?it/s, est. speed input: 0.00 toks/s, output: 0.00 toks/s]Processed prompts: 100%|██████████| 1/1 [00:01<00:00,  1.21s/it, est. speed input: 14.88 toks/s, output: 41.33 toks/s]Processed prompts: 100%|██████████| 1/1 [00:01<00:00,  1.21s/it, est. speed input: 14.88 toks/s, output: 41.33 toks/s]Processed prompts: 100%|██████████| 1/1 [00:01<00:00,  1.21s/it, est. speed input: 14.88 toks/s, output: 41.33 toks/s]
+Stored:   →  "Economists Predict Stronger Economic Growth in Q4"
+
+The headline is positive. This means that economic growth is expected to improve in the fourth quarter, which is generally a good sign for the economy.
+
+However
+Adding requests:   0%|          | 0/1 [00:00<?, ?it/s]Adding requests: 100%|██████████| 1/1 [00:00<00:00, 1605.17it/s]
+Processed prompts:   0%|          | 0/1 [00:00<?, ?it/s, est. speed input: 0.00 toks/s, output: 0.00 toks/s]Processed prompts: 100%|██████████| 1/1 [00:01<00:00,  1.21s/it, est. speed input: 14.83 toks/s, output: 41.18 toks/s]Processed prompts: 100%|██████████| 1/1 [00:01<00:00,  1.21s/it, est. speed input: 14.83 toks/s, output: 41.18 toks/s]Processed prompts: 100%|██████████| 1/1 [00:01<00:00,  1.21s/it, est. speed input: 14.83 toks/s, output: 41.18 toks/s]
+Stored:   →  "Stock Market Falls Sharply After Federal Reserve Raises Interest Rates"
+
+Negative
+
+When the stock market falls sharply, investors typically respond with negativity, as their investments' values decrease. The headline mentions a fall
+Adding requests:   0%|          | 0/1 [00:00<?, ?it/s]Adding requests: 100%|██████████| 1/1 [00:00<00:00, 1582.76it/s]
+Processed prompts:   0%|          | 0/1 [00:00<?, ?it/s, est. speed input: 0.00 toks/s, output: 0.00 toks/s]Processed prompts: 100%|██████████| 1/1 [00:01<00:00,  1.26s/it, est. speed input: 14.25 toks/s, output: 39.58 toks/s]Processed prompts: 100%|██████████| 1/1 [00:01<00:00,  1.26s/it, est. speed input: 14.25 toks/s, output: 39.58 toks/s]Processed prompts: 100%|██████████| 1/1 [00:01<00:00,  1.26s/it, est. speed input: 14.25 toks/s, output: 39.58 toks/s]
+Stored:   →  "Job Market Showing Strong Recovery, Leaves Workers on the Sidelines"
+
+This headline is perhaps slightly positive. While the recovery in the job market might be good news for the economy, the fact that workers are being left
+Adding requests:   0%|          | 0/1 [00:00<?, ?it/s]Adding requests: 100%|██████████| 1/1 [00:00<00:00, 2445.66it/s]
+Processed prompts:   0%|          | 0/1 [00:00<?, ?it/s, est. speed input: 0.00 toks/s, output: 0.00 toks/s]Processed prompts: 100%|██████████| 1/1 [00:01<00:00,  1.31s/it, est. speed input: 13.75 toks/s, output: 38.20 toks/s]Processed prompts: 100%|██████████| 1/1 [00:01<00:00,  1.31s/it, est. speed input: 13.75 toks/s, output: 38.20 toks/s]Processed prompts: 100%|██████████| 1/1 [00:01<00:00,  1.31s/it, est. speed input: 13.75 toks/s, output: 38.20 toks/s]
+Stored:   →  "Goldman Sachs Group Inc. reported a quarterly net profit of $7.32 billion, a 12% decrease from the same period last year"
+
+Neutral. The headline reports a decrease in profits,
+Adding requests:   0%|          | 0/1 [00:00<?, ?it/s]Adding requests: 100%|██████████| 1/1 [00:00<00:00, 1435.91it/s]
+Processed prompts:   0%|          | 0/1 [00:00<?, ?it/s, est. speed input: 0.00 toks/s, output: 0.00 toks/s]Processed prompts: 100%|██████████| 1/1 [00:01<00:00,  1.31s/it, est. speed input: 13.69 toks/s, output: 38.04 toks/s]Processed prompts: 100%|██████████| 1/1 [00:01<00:00,  1.31s/it, est. speed input: 13.69 toks/s, output: 38.04 toks/s]Processed prompts: 100%|██████████| 1/1 [00:01<00:00,  1.31s/it, est. speed input: 13.69 toks/s, output: 38.04 toks/s]
+Stored:   →  "LabCorp stock drops after Q3 earnings miss analyst expectations"
+
+This headline is negative, as it indicates that LabCorp's Q3 earnings did not meet the anticipated results of analysts, leading to a decrease in
+Adding requests:   0%|          | 0/1 [00:00<?, ?it/s]Adding requests: 100%|██████████| 1/1 [00:00<00:00, 2199.43it/s]
+Processed prompts:   0%|          | 0/1 [00:00<?, ?it/s, est. speed input: 0.00 toks/s, output: 0.00 toks/s]Processed prompts: 100%|██████████| 1/1 [00:01<00:00,  1.31s/it, est. speed input: 13.71 toks/s, output: 38.08 toks/s]Processed prompts: 100%|██████████| 1/1 [00:01<00:00,  1.31s/it, est. speed input: 13.71 toks/s, output: 38.08 toks/s]Processed prompts: 100%|██████████| 1/1 [00:01<00:00,  1.31s/it, est. speed input: 13.71 toks/s, output: 38.08 toks/s]
+Stored:   →  "Tech giant reports strongest quarter in company's history, showcasing exceptional growth of 50% in net income"
+
+The financial news headline "Tech giant reports strongest quarter in company's history, showcasing
+Adding requests:   0%|          | 0/1 [00:00<?, ?it/s]Adding requests: 100%|██████████| 1/1 [00:00<00:00, 505.28it/s]
+Processed prompts:   0%|          | 0/1 [00:00<?, ?it/s, est. speed input: 0.00 toks/s, output: 0.00 toks/s]Processed prompts: 100%|██████████| 1/1 [00:01<00:00,  1.46s/it, est. speed input: 12.30 toks/s, output: 34.17 toks/s]Processed prompts: 100%|██████████| 1/1 [00:01<00:00,  1.46s/it, est. speed input: 12.30 toks/s, output: 34.17 toks/s]Processed prompts: 100%|██████████| 1/1 [00:01<00:00,  1.46s/it, est. speed input: 12.30 toks/s, output: 34.17 toks/s]
+Stored:   →  Swiss bank announces acquisition of smaller bank with lower net loss than expected
+
+The headline indicates that a Swiss bank has acquired a smaller bank with a lower net loss than expected. In general, this type of news can be considered as positive
+Adding requests:   0%|          | 0/1 [00:00<?, ?it/s]Adding requests: 100%|██████████| 1/1 [00:00<00:00, 2204.05it/s]
+Processed prompts:   0%|          | 0/1 [00:00<?, ?it/s, est. speed input: 0.00 toks/s, output: 0.00 toks/s]Processed prompts: 100%|██████████| 1/1 [00:01<00:00,  1.33s/it, est. speed input: 13.49 toks/s, output: 36.72 toks/s]Processed prompts: 100%|██████████| 1/1 [00:01<00:00,  1.33s/it, est. speed input: 13.49 toks/s, output: 36.72 toks/s]Processed prompts: 100%|██████████| 1/1 [00:01<00:00,  1.33s/it, est. speed input: 13.49 toks/s, output: 36.72 toks/s]
+Stored:   →  "Tech giant Microsoft announces increase in revenue by 15%"
+
+The headline is positive, as it indicates an improvement or growth in Microsoft's financial performance, specifically a 15% increase in revenue.
+Adding requests:   0%|          | 0/1 [00:00<?, ?it/s]Adding requests: 100%|██████████| 1/1 [00:00<00:00, 1317.72it/s]
+Processed prompts:   0%|          | 0/1 [00:00<?, ?it/s, est. speed input: 0.00 toks/s, output: 0.00 toks/s]Processed prompts: 100%|██████████| 1/1 [00:01<00:00,  1.13s/it, est. speed input: 15.96 toks/s, output: 44.34 toks/s]Processed prompts: 100%|██████████| 1/1 [00:01<00:00,  1.13s/it, est. speed input: 15.96 toks/s, output: 44.34 toks/s]Processed prompts: 100%|██████████| 1/1 [00:01<00:00,  1.13s/it, est. speed input: 15.96 toks/s, output: 44.34 toks/s]
+Stored:   →  "U.S. employment figures rose by 312,000 in February, exceeding economist estimates"
+
+This headline is positive because the employment figures (i.e., the number of new jobs or jobs created
+Adding requests:   0%|          | 0/1 [00:00<?, ?it/s]Adding requests: 100%|██████████| 1/1 [00:00<00:00, 2605.16it/s]
+Processed prompts:   0%|          | 0/1 [00:00<?, ?it/s, est. speed input: 0.00 toks/s, output: 0.00 toks/s]Processed prompts: 100%|██████████| 1/1 [00:00<00:00,  1.09it/s, est. speed input: 19.58 toks/s, output: 44.59 toks/s]Processed prompts: 100%|██████████| 1/1 [00:00<00:00,  1.09it/s, est. speed input: 19.58 toks/s, output: 44.59 toks/s]Processed prompts: 100%|██████████| 1/1 [00:00<00:00,  1.09it/s, est. speed input: 19.58 toks/s, output: 44.59 toks/s]
+Stored:   →  "New home sales unexpectedly drop in May"
+
+This headline is negative, as it indicates a decline in the sales of new homes — a factor that could potentially slow down economic growth.
+Adding requests:   0%|          | 0/1 [00:00<?, ?it/s]Adding requests: 100%|██████████| 1/1 [00:00<00:00, 687.82it/s]
+Processed prompts:   0%|          | 0/1 [00:00<?, ?it/s, est. speed input: 0.00 toks/s, output: 0.00 toks/s]Processed prompts: 100%|██████████| 1/1 [00:01<00:00,  1.49s/it, est. speed input: 12.07 toks/s, output: 33.53 toks/s]Processed prompts: 100%|██████████| 1/1 [00:01<00:00,  1.49s/it, est. speed input: 12.07 toks/s, output: 33.53 toks/s]Processed prompts: 100%|██████████| 1/1 [00:01<00:00,  1.49s/it, est. speed input: 12.07 toks/s, output: 33.53 toks/s]
+Stored:   →  "S&P 500 Gains for First Time in Four Weeks"
+
+This headline is positive as it indicates that the S&P 500 has increased in value, which is typically associated with a favorable
+Adding requests:   0%|          | 0/1 [00:00<?, ?it/s]Adding requests: 100%|██████████| 1/1 [00:00<00:00, 2000.14it/s]
+Processed prompts:   0%|          | 0/1 [00:00<?, ?it/s, est. speed input: 0.00 toks/s, output: 0.00 toks/s]Processed prompts: 100%|██████████| 1/1 [00:01<00:00,  1.13s/it, est. speed input: 15.99 toks/s, output: 44.42 toks/s]Processed prompts: 100%|██████████| 1/1 [00:01<00:00,  1.13s/it, est. speed input: 15.99 toks/s, output: 44.42 toks/s]Processed prompts: 100%|██████████| 1/1 [00:01<00:00,  1.13s/it, est. speed input: 15.99 toks/s, output: 44.42 toks/s]
+Stored:   →  "Market Volatility Stops Hitting Record Highs After Two Days"
+
+This headline can be classified as neutral. While the news that market volatility is no longer hitting record highs might be perceived as a positive development
+Adding requests:   0%|          | 0/1 [00:00<?, ?it/s]Adding requests: 100%|██████████| 1/1 [00:00<00:00, 1439.36it/s]
+Processed prompts:   0%|          | 0/1 [00:00<?, ?it/s, est. speed input: 0.00 toks/s, output: 0.00 toks/s]Processed prompts: 100%|██████████| 1/1 [00:01<00:00,  1.12s/it, est. speed input: 16.08 toks/s, output: 44.65 toks/s]Processed prompts: 100%|██████████| 1/1 [00:01<00:00,  1.12s/it, est. speed input: 16.08 toks/s, output: 44.65 toks/s]Processed prompts: 100%|██████████| 1/1 [00:01<00:00,  1.12s/it, est. speed input: 16.08 toks/s, output: 44.65 toks/s]
+Stored:   →  "Stock prices point to a strong economic recovery"
+
+This headline is positive as it suggests that stock prices are indicating a strong economic recovery, which is typically viewed as a positive sign.
+
+Here's a bit more context:
+Adding requests:   0%|          | 0/1 [00:00<?, ?it/s]Adding requests: 100%|██████████| 1/1 [00:00<00:00, 2227.46it/s]
+Processed prompts:   0%|          | 0/1 [00:00<?, ?it/s, est. speed input: 0.00 toks/s, output: 0.00 toks/s]Processed prompts: 100%|██████████| 1/1 [00:01<00:00,  1.01s/it, est. speed input: 17.82 toks/s, output: 33.66 toks/s]Processed prompts: 100%|██████████| 1/1 [00:01<00:00,  1.01s/it, est. speed input: 17.82 toks/s, output: 33.66 toks/s]Processed prompts: 100%|██████████| 1/1 [00:01<00:00,  1.01s/it, est. speed input: 17.82 toks/s, output: 33.66 toks/s]
